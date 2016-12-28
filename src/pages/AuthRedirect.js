@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 
 import BbvaApi from '../core/utils/BbvaApi'
 
@@ -14,7 +15,12 @@ class AuthRedirect extends React.Component {
         }
 
         return (
-            <div>Completing Authentication</div>
+            <Card style={{ margin: "0 auto", marginTop: "30px", width: '80%' }}>
+                <CardTitle>Returning...</CardTitle>
+                <CardText>
+                    <div>Completing Authentication</div>
+                </CardText>
+            </Card>
         );
     }
 }

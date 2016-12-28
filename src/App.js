@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import {Layout, Header, Navigation, Drawer, Content, Button} from 'react-mdl';
 
-import BbvaApi from './core/utils/BbvaApi';
-
 class App extends Component {
   render() {
 
     function LoginBBVA() {
       let location = encodeURI('https://localhost:3000/bbva');
       window.location.href = `https://connect.bbva.com/token/authorize?client_id=app.bbva.mynewapp&response_type=code&redirect_uri=${location}`;
-    }
-
-    function GetBBVAAccounts() {
-      BbvaApi.getAccounts();
     }
 
     function LoginCiti() {
@@ -36,8 +30,6 @@ class App extends Component {
           <Navigation>
             <a href="/">Home</a>
             <a href="/accounts">Accounts</a>
-            <a href="">Link</a>
-            <a href="">Link</a>
           </Navigation>
         </Drawer>
         <Content>
@@ -47,7 +39,6 @@ class App extends Component {
           <Button raised colored onClick={LoginCiti}>Login Citi</Button>
           <br/>
           <br/>
-          <Button raised colored onClick={GetBBVAAccounts}>Get BBVA Accounts</Button>
           {this.props.children}
         </Content>
       </Layout>);
