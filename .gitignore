@@ -13,3 +13,13 @@ build
 .DS_Store
 .env
 npm-debug.log
+
+
+.idea/libraries/mybankingclient_node_modules.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/mybankingclient.iml
+.idea/vcs.xml
+.idea/watcherTasks.xml
+.idea/jsLibraryMappings.xml
+.idea/workspace.xml
