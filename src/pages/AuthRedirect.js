@@ -7,8 +7,10 @@ class AuthRedirect extends React.Component {
         let currentLocation = this.props.router.getCurrentLocation();
         let code = currentLocation.query.code;
 
-        if(currentLocation.pathname === '/bbva'){
-            BbvaApi.GetAuthToken(code);
+        if (currentLocation.pathname === '/bbva') {
+            BbvaApi.getAuthToken(code);
+        } else if (currentLocation.pathname === '/citi') {
+            //CitiApi.GetAuthToken(code);
         }
 
         return (

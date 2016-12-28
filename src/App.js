@@ -12,7 +12,7 @@ class App extends Component {
     }
 
     function GetBBVAAccounts() {
-      BbvaApi.GetAccounts();
+      BbvaApi.getAccounts();
     }
 
     function LoginCiti() {
