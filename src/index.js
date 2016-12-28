@@ -7,8 +7,11 @@ import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';
+import Profile from './pages/Profile';
 import AuthRedirect from './pages/AuthRedirect';
 import NoMatch from './pages/NoMatch';
+import Login from './pages/Login';
+import Logout from './pages/Logout';
 
 import './index.css';
 import 'react-mdl/extra/material.css';
@@ -20,8 +23,11 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="accounts" component={Accounts}/>
+        <Route path="profile" component={Profile}/>
         <Route path="bbva" component={AuthRedirect}/>
         <Route path="citi" component={AuthRedirect}/>
+        <Route path="login" component={Login}/>
+        <Route path="logout" component={Logout}/>
         <Route path="*" component={NoMatch}/>
       </Route>
     </Router>

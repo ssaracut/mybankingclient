@@ -1,5 +1,11 @@
 export default class BbvaApi {
 
+    /*
+        https://www.npmjs.com/package/react-cookie
+        Should probably move the local storage to a cookie with path set, httponly = true, and secure = true
+        to help make the access token and refresh token harder to grab by malicious code
+    */
+
     static getAuthToken(key) {
         return new Promise(function (resolve, reject) {
             const authorization = btoa("app.bbva.mynewapp:gQZxI*hKVUF64ADt9BC34rmVT5Ztk0YtiQzBHv3LO2CtsIxS612q$xFBcawpJs4S");
@@ -55,7 +61,7 @@ export default class BbvaApi {
                 })
                 .then(function (data) {
                     console.log('Token Request succeeded with JSON response', data);
-                    if (data.result.code === 200) {
+                    if (!data.result) {
                         localStorage.setItem('auth-data', JSON.stringify(data));
                         resolve(data);
                     } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
@@ -94,6 +100,8 @@ export default class BbvaApi {
                     console.log('Accounts Request succeeded with JSON response', data);
                     if (data.result.code === 200) {
                         resolve(data);
+                    } else if(data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                        this.refreshAuthToken(refresh);
                     } else {
                         reject(data.result.info);
                     }
@@ -102,7 +110,7 @@ export default class BbvaApi {
                     console.log('Accounts Request failed', error);
                     reject(error);
                 });
-        });
+        }.bind(this));
     }
 
 }

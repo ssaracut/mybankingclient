@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
-import security from '../../../core/utils/SecurityService';
+import MyBankingClientApi from '../../utils/MyBankingClientApi';
 
 export default {
-    getProfile: createAction('GET_PROFILE', (loginIfRequired) => { return security.getProfile(loginIfRequired) }),
-    logout: createAction('LOGOUT', () => { return security.logout() })
+    login: createAction('LOGIN', () => { return MyBankingClientApi.login() }),
+    logout: createAction('LOGOUT', () => { return MyBankingClientApi.logout() })
 } 
