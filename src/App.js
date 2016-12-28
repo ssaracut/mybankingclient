@@ -21,7 +21,7 @@ class App extends Component {
     }
 
     return (
-      <Layout style={{ background: 'url(http://www.getmdl.io/assets/demos/transparent.jpg) center / cover' }}>
+      <Layout style={{ background: 'url(https://www.getmdl.io/assets/demos/transparent.jpg) center / cover' }}>
         <Header transparent title="My Banking Client" style={{ color: 'white' }}>
           {/*
           <Navigation>
