@@ -51,7 +51,7 @@ export default class BbvaApi {
 
                 if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
                     // redirect to login page
-                    alert('You must re-authenticate to the bank as your access has expired.')                    
+                    alert('You must re-authenticate to the bank as your access has expired.')
                 } else {
                     localStorage.setItem('auth-data', JSON.stringify(data))
                 }
@@ -64,33 +64,39 @@ export default class BbvaApi {
     }
 
     static getAccounts() {
+        const promise = new Promise(function (resolve, reject) {
 
-        const authorization = JSON.parse(localStorage.getItem('auth-data')).access_token;
-        const refresh = JSON.parse(localStorage.getItem('auth-data')).refresh_token;
-        const url = `https://apis.bbva.com/accounts-sbx/v1/me/accounts`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `jwt ${authorization}`
-            },
-            mode: 'cors'
-        }
+            const authorization = JSON.parse(localStorage.getItem('auth-data')).access_token;
+            const refresh = JSON.parse(localStorage.getItem('auth-data')).refresh_token;
+            const url = `https://apis.bbva.com/accounts-sbx/v1/me/accounts`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `jwt ${authorization}`
+                },
+                mode: 'cors'
+            }
 
-        fetch(url, options)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                console.log('Request succeeded with JSON response', data);
-                if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
-                    this.refreshAuthToken(refresh);
-                }
-            }.bind(this))
-            .catch(function (error) {
-                console.log('Request failed', error);
-            });
+            fetch(url, options)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log('Request succeeded with JSON response', data);
+                    if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                        this.refreshAuthToken(refresh);
+                    } else {
+                        resolve(data);
+                    }
+                }.bind(this))
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                    reject(error);
+                });
+        });
 
+        return promise;
     }
 
 }
