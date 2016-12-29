@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
+import { Button, Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -52,9 +52,26 @@ const renderCell = function(account) {
                     <br /><br /><br />
                 </CardText>
                 <CardActions border>
-                    <IconButton name="input" style={{margin: '0 10px'}} />
-                    <IconButton name="compare_arrows" style={{margin: '0 10px'}} />
-                    <IconButton name="attach_money" style={{margin: '0 10px'}} />
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="list" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Transactions</div>
+                    </div>
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="input" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Deposit</div>
+                    </div>
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="compare_arrows" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Transfer</div>
+                    </div>
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="attach_money" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Pay Bills</div>
+                    </div>
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="email" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>EMT</div>
+                    </div>
                 </CardActions>
                 <CardMenu style={{color: '#000'}}>
                     <IconButton name="more_vert" />
