@@ -6,6 +6,11 @@ export default class BbvaApi {
         to help make the access token and refresh token harder to grab by malicious code
     */
 
+    /*
+        Pretty sure I'm breaking rules by modifying the profile object directly here rather than having a subsequent
+        action call since the redux session.profile value will be out of sync now.  Will fix this later.
+    */
+
     static getAuthToken(key) {
         return new Promise(function (resolve, reject) {
             const profile = JSON.parse(localStorage.getItem('profile'));
