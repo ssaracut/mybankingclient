@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
+import { Button, Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -52,6 +52,10 @@ const renderCell = function(account) {
                     <br /><br /><br />
                 </CardText>
                 <CardActions border>
+                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="list" /></div>
+                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Transactions</div>
+                    </div>
                     <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
                         <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="input" /></div>
                         <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Deposit</div>
