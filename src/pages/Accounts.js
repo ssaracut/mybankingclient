@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styles from './accounts.css';
 
 import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { Button, Cell, Grid, IconButton, Menu, MenuItem, Spinner } from 'react-mdl/lib';
+import { Cell, Chip, ChipContact, Grid, IconButton, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -43,37 +44,42 @@ const renderGrid = function(accounts) {
 const renderCell = function(account) {
     return (
         <Cell col={4} key={account.accountKey}>
-            <Card shadow={0} style={{ margin: "0 auto", marginBottom: "10px", width: '100%' }}>
+            <Card shadow={0} className="cardAccount">
                 <CardText>
                     <b>{account.name}</b>
                     <br />{account.number}
                     <br /><br />
-                    <i className="material-icons">account_balance</i>
+                    <Tooltip label="Balance">
+                        <Chip onClick={e => { alert('Clicked!'); }}>
+                            <ChipContact className="mdl-color--teal mdl-color-text--white"><i className="material-icons chipContact">account_balance</i></ChipContact>
+                            $ {account.balance}
+                        </Chip>
+                    </Tooltip>
                     <br /><br /><br />
                 </CardText>
                 <CardActions border>
-                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="list" /></div>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Transactions</div>
+                    <div className="cardActionsDiv">
+                        <div className="cardActionAlign"><IconButton name="list" /></div>
+                        <div className="cardActionAlign">Transactions</div>
                     </div>
-                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="input" /></div>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Deposit</div>
+                    <div className="cardActionsDiv">
+                        <div className="cardActionAlign"><IconButton name="input" /></div>
+                        <div className="cardActionAlign">Deposit</div>
                     </div>
-                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="compare_arrows" /></div>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Transfer</div>
+                    <div className="cardActionsDiv">
+                        <div className="cardActionAlign"><IconButton name="compare_arrows" /></div>
+                        <div className="cardActionAlign">Transfer</div>
                     </div>
-                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="attach_money" /></div>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>Pay Bills</div>
+                    <div className="cardActionsDiv">
+                        <div className="cardActionAlign"><IconButton name="attach_money" /></div>
+                        <div className="cardActionAlign">Pay Bills</div>
                     </div>
-                    <div style={{ float: 'left', position: 'relative', margin: '0 10px'}}>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}><IconButton name="email" /></div>
-                        <div style={{ fontSize: '11px', margin: '0 auto', width: '100%', textAlign: 'center'}}>EMT</div>
+                    <div className="cardActionsDiv">
+                        <div className="cardActionAlign"><IconButton name="email" /></div>
+                        <div className="cardActionAlign">EMT</div>
                     </div>
                 </CardActions>
-                <CardMenu style={{color: '#000'}}>
+                <CardMenu className="cardMenuAccount">
                     <IconButton name="more_vert" id={'account_' + account.accountKey} />
                     <Menu target={'account_' + account.accountKey} align="right">
                         <MenuItem>Print Void Cheque</MenuItem>
@@ -95,5 +101,7 @@ const mapDispatchToProps = function (dispatch) {
         accountsActions: bindActionCreators(AccountsActions, dispatch)
     };
 };
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
