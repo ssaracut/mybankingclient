@@ -52,7 +52,9 @@ const renderCell = function(account) {
                     <br /><br /><br />
                 </CardText>
                 <CardActions border>
-                    <IconButton name="more_vert" />
+                    <IconButton name="input" style={{margin: '0 10px'}} />
+                    <IconButton name="compare_arrows" style={{margin: '0 10px'}} />
+                    <IconButton name="attach_money" style={{margin: '0 10px'}} />
                 </CardActions>
                 <CardMenu style={{color: '#000'}}>
                     <IconButton name="more_vert" />
