@@ -9,7 +9,7 @@ export default class MyBankingClientApi {
 
     static getProfile() {
         return new Promise(function (resolve, reject) {
-            let profile = localStorage.getItem('profile');
+            let profile = JSON.parse(localStorage.getItem('profile'));
 
             if (!profile) {
                 //pretend we called an api for profile and are now storing it
