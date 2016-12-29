@@ -1,6 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { browserHistory  } from 'react-router'
 
 import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 
@@ -9,7 +10,12 @@ import SessionActions from '../core/redux/session/SessionActions'
 class LoginPage extends React.Component {
     componentWillMount() {
         if (!this.props.session.loggedIn) {
-            this.props.sessionActions.login();
+            this.props.sessionActions.login()
+                .then(function () {
+                    this.props.sessionActions.getProfile().then(function () {
+                        browserHistory.push('');
+                    })
+                }.bind(this));
         }
     }
 

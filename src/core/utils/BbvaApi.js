@@ -8,6 +8,7 @@ export default class BbvaApi {
 
     static getAuthToken(key) {
         return new Promise(function (resolve, reject) {
+            const profile = JSON.parse(localStorage.getItem('profile'));
             const authorization = btoa("app.bbva.mynewapp:gQZxI*hKVUF64ADt9BC34rmVT5Ztk0YtiQzBHv3LO2CtsIxS612q$xFBcawpJs4S");
             const url = `https://connect.bbva.com/token?grant_type=authorization_code&code=${key}&redirect_uri=https://localhost:3000/bbva`;
             const options = {
@@ -26,7 +27,8 @@ export default class BbvaApi {
                 .then(function (data) {
                     console.log('Token Request succeeded with JSON response', data);
                     if (!data.result) {
-                        localStorage.setItem('auth-data', JSON.stringify(data));
+                        profile.banks.bbva = data;
+                        localStorage.setItem('profile', JSON.stringify(profile));
                         resolve(data);
                     } else {
                         reject(data.result.info);
@@ -42,6 +44,7 @@ export default class BbvaApi {
     static refreshAuthToken(token) {
         return new Promise(function (resolve, reject) {
 
+            const profile = JSON.parse(localStorage.getItem('profile'));
             const authorization = btoa("app.bbva.mynewapp:gQZxI*hKVUF64ADt9BC34rmVT5Ztk0YtiQzBHv3LO2CtsIxS612q$xFBcawpJs4S");
             const url = 'https://connect.bbva.com/token?grant_type=refresh_token';
             const options = {
@@ -62,7 +65,8 @@ export default class BbvaApi {
                 .then(function (data) {
                     console.log('Token Request succeeded with JSON response', data);
                     if (!data.result) {
-                        localStorage.setItem('auth-data', JSON.stringify(data));
+                        profile.banks.bbva = data;
+                        localStorage.setItem('profile', JSON.stringify(profile));
                         resolve(data);
                     } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
                         alert('You must re-authenticate to the bank as your access has expired.');
@@ -80,8 +84,8 @@ export default class BbvaApi {
     static getAccounts() {
         return new Promise(function (resolve, reject) {
 
-            const authorization = JSON.parse(localStorage.getItem('auth-data')).access_token;
-            const refresh = JSON.parse(localStorage.getItem('auth-data')).refresh_token;
+            const authorization = JSON.parse(localStorage.getItem('profile')).banks.bbva.access_token;
+            const refresh = JSON.parse(localStorage.getItem('profile')).banks.bbva.refresh_token;
             const url = `https://apis.bbva.com/accounts-sbx/v1/me/accounts`;
             const options = {
                 method: 'GET',
@@ -100,7 +104,7 @@ export default class BbvaApi {
                     console.log('Accounts Request succeeded with JSON response', data);
                     if (data.result.code === 200) {
                         resolve(data);
-                    } else if(data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                    } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
                         this.refreshAuthToken(refresh);
                     } else {
                         reject(data.result.info);

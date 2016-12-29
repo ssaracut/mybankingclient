@@ -7,6 +7,14 @@ import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl'
 import SessionActions from './core/redux/session/SessionActions'
 
 class App extends Component {
+  componentWillMount() {
+    this.props.sessionActions.getStoredAuth()
+      .then(function (auth) {
+        if (auth && auth.payload) {
+          this.props.sessionActions.getProfile();
+        }
+      }.bind(this));
+  }
   render() {
     return (
       <Layout style={{ background: 'url(https://www.getmdl.io/assets/demos/transparent.jpg) center / cover' }}>
