@@ -15,7 +15,8 @@ class AccountsPage extends React.Component {
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
     }
-        componentWillMount() {
+
+    componentWillMount() {
         if (this.props.accounts === null) {
             this.props.accountsActions.getAccounts();
         }
@@ -24,25 +25,14 @@ class AccountsPage extends React.Component {
     render() {
         if (this.props.accounts === null) {
             return (
-                <Spinner style={{margin: 'auto'}} />
+                <Spinner style={{margin: 'auto'}}/>
             );
         }
         else {
             return (
                 <div style={{width: '90%', margin: 'auto'}}>
                     {renderGrid(this.props.accounts, this.handleOpenDialog)}
-                    <div>
-                        <Dialog open={this.state.openDialog} onCancel={this.handleCloseDialog}>
-                            <DialogTitle>Allow data collection?</DialogTitle>
-                            <DialogContent>
-                                <p>Allowing us to collect data will let us get you the information you want faster.</p>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button type='button'>Agree</Button>
-                                <Button type='button' onClick={this.handleCloseDialog}>Disagree</Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
+                    {renderDialog(this.state, this.handleCloseDialog)}
                 </div>
             );
         }
@@ -59,6 +49,21 @@ class AccountsPage extends React.Component {
             openDialog: false
         });
     }
+}
+
+const renderDialog = function(state, handleCloseDialog){
+    return(
+        <Dialog open={state.openDialog} onCancel={handleCloseDialog}>
+            <DialogTitle>Allow data collection?</DialogTitle>
+            <DialogContent>
+                <p>Allowing us to collect data will let us get you the information you want faster.</p>
+            </DialogContent>
+            <DialogActions>
+                <Button type='button'>Agree</Button>
+                <Button type='button' onClick={handleCloseDialog}>Disagree</Button>
+            </DialogActions>
+        </Dialog>
+    )
 }
 
 const renderGrid = function(accounts, handleOpenDialog) {
