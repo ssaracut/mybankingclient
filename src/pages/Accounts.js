@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { Button, Card, CardActions, CardMenu, CardTitle, CardText, IconButton } from 'react-mdl/lib/Card'
-import { Cell, Grid } from 'react-mdl/lib';
+import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
+import { Button, Cell, Grid, IconButton } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -33,7 +33,6 @@ class AccountsPage extends React.Component {
     }
 }
 
-
 const renderGrid = function(accounts) {
     var cells = [];
 
@@ -56,6 +55,12 @@ const renderCell = function(account) {
                     <br /><br />
                     <b>$ {account.balance}</b>
                 </CardText>
+                <CardActions border>
+                    <Button colored>More quick option icons here</Button>
+                </CardActions>
+                <CardMenu style={{color: '#000'}}>
+                    <IconButton name="more_vert" />
+                </CardMenu>
             </Card>
         </Cell>
     );
@@ -72,4 +77,3 @@ const mapDispatchToProps = function (dispatch) {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
-
