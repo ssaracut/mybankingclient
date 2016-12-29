@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { Button, Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
+import { Button, Cell, Grid, IconButton, Menu, MenuItem, Spinner } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -48,7 +48,7 @@ const renderCell = function(account) {
                     <b>{account.name}</b>
                     <br />{account.number}
                     <br /><br />
-                    <IconButton name="account_balance" /><b>$ {account.balance}</b>
+                    <i className="material-icons">account_balance</i>
                     <br /><br /><br />
                 </CardText>
                 <CardActions border>
@@ -74,7 +74,12 @@ const renderCell = function(account) {
                     </div>
                 </CardActions>
                 <CardMenu style={{color: '#000'}}>
-                    <IconButton name="more_vert" />
+                    <IconButton name="more_vert" id={'account_' + account.accountKey} />
+                    <Menu target={'account_' + account.accountKey} align="right">
+                        <MenuItem>Print Void Cheque</MenuItem>
+                        <MenuItem>Pre-Authorized Payments</MenuItem>
+                        <MenuItem>Rewards</MenuItem>
+                    </Menu>
                 </CardMenu>
             </Card>
         </Cell>
