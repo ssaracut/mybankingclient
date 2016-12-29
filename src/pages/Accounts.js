@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { List, ListItem, ListItemContent, ListItemAction } from 'react-mdl/lib';
+import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
+import { Cell, Grid, IconButton, Spinner } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
@@ -17,36 +17,49 @@ class AccountsPage extends React.Component {
     render() {
         if (this.props.accounts === null) {
             return (
-                <Card style={{ margin: "0 auto", marginTop: "30px", width: '80%' }}>
-                    <CardTitle>Accounts</CardTitle>
-                    <CardText>
-                        <img src="images/spinner-small.gif"/>
-                    </CardText>
-                </Card>
+                <Spinner style={{margin: 'auto'}} />
             );
         }
         else {
-
             return (
-                <Card shadow={0} style={{ margin: "0 auto", marginBottom: "30px", marginTop: "30px", width: '80%' }}>
-                    <CardTitle>Accounts</CardTitle>
-                    <CardText>
-                        <List>
-                            {this.props.accounts.map(account => (
-                                <ListItem key={account.accountKey} twoLine>
-                                    <ListItemContent subtitle={account.number}>{account.name}</ListItemContent>
-                                    <ListItemAction>
-                                        <span>{account.balance}</span>
-                                    </ListItemAction>
-                                </ListItem>
-                            )) }
-                        </List>
-                    </CardText>
-                </Card>
+                <div style={{width: '80%', margin: 'auto'}}>{renderGrid(this.props.accounts)}</div>
             );
         }
     }
+}
 
+const renderGrid = function(accounts) {
+    var cells = [];
+
+    for (var i = 0; i < accounts.length; i++) {
+        cells.push(renderCell(accounts[i]))
+    }
+
+    return (
+        <Grid className="">{cells}</Grid>
+    );
+}
+
+const renderCell = function(account) {
+    return (
+        <Cell col={4} key={account.accountKey}>
+            <Card shadow={0} style={{ margin: "0 auto", marginBottom: "10px", width: '100%' }}>
+                <CardText>
+                    <b>{account.name}</b>
+                    <br />{account.number}
+                    <br /><br />
+                    <IconButton name="account_balance" /><b>$ {account.balance}</b>
+                    <br /><br /><br />
+                </CardText>
+                <CardActions border>
+                    <IconButton name="more_vert" />
+                </CardActions>
+                <CardMenu style={{color: '#000'}}>
+                    <IconButton name="more_vert" />
+                </CardMenu>
+            </Card>
+        </Cell>
+    );
 }
 
 const mapStateToProps = function (state) {
@@ -60,4 +73,3 @@ const mapDispatchToProps = function (dispatch) {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
-
