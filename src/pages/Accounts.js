@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styles from './accounts.css';
 
-import { Card, CardActions, CardMenu, CardTitle, CardText } from 'react-mdl/lib/Card'
-import { Cell, Chip, ChipContact, Grid, IconButton, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib';
+import { Card, CardActions, CardMenu, CardText } from 'react-mdl/lib/Card'
+import { Button, Cell, Chip, ChipContact, Dialog, DialogTitle, DialogContent, DialogActions, Grid, IconButton, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib';
 
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
 class AccountsPage extends React.Component {
-    componentWillMount() {
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.handleOpenDialog = this.handleOpenDialog.bind(this);
+        this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    }
+        componentWillMount() {
         if (this.props.accounts === null) {
             this.props.accountsActions.getAccounts();
         }
@@ -23,17 +29,43 @@ class AccountsPage extends React.Component {
         }
         else {
             return (
-                <div style={{width: '80%', margin: 'auto'}}>{renderGrid(this.props.accounts)}</div>
+                <div style={{width: '90%', margin: 'auto'}}>
+                    {renderGrid(this.props.accounts, this.handleOpenDialog)}
+                    <div>
+                        <Dialog open={this.state.openDialog} onCancel={this.handleCloseDialog}>
+                            <DialogTitle>Allow data collection?</DialogTitle>
+                            <DialogContent>
+                                <p>Allowing us to collect data will let us get you the information you want faster.</p>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button type='button'>Agree</Button>
+                                <Button type='button' onClick={this.handleCloseDialog}>Disagree</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+                </div>
             );
         }
     }
+
+    handleOpenDialog() {
+        this.setState({
+            openDialog: true
+        });
+    }
+
+    handleCloseDialog() {
+        this.setState({
+            openDialog: false
+        });
+    }
 }
 
-const renderGrid = function(accounts) {
+const renderGrid = function(accounts, handleOpenDialog) {
     var cells = [];
 
     for (var i = 0; i < accounts.length; i++) {
-        cells.push(renderCell(accounts[i]))
+        cells.push(renderCell(accounts[i], handleOpenDialog))
     }
 
     return (
@@ -41,7 +73,7 @@ const renderGrid = function(accounts) {
     );
 }
 
-const renderCell = function(account) {
+const renderCell = function(account, handleOpenDialog) {
     return (
         <Cell col={4} key={account.accountKey}>
             <Card shadow={0} className="cardAccount">
@@ -50,7 +82,7 @@ const renderCell = function(account) {
                     <br />{account.number}
                     <br /><br />
                     <Tooltip label="Balance">
-                        <Chip onClick={e => { alert('Clicked!'); }}>
+                        <Chip onClick={handleOpenDialog}>
                             <ChipContact className="mdl-color--teal mdl-color-text--white"><i className="material-icons chipContact">account_balance</i></ChipContact>
                             $ {account.balance}
                         </Chip>
@@ -101,7 +133,5 @@ const mapDispatchToProps = function (dispatch) {
         accountsActions: bindActionCreators(AccountsActions, dispatch)
     };
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
