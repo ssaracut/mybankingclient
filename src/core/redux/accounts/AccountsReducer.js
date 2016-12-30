@@ -1,11 +1,21 @@
 const _initialState = {
-    accounts: null
+    accountState : {
+        accounts: null,
+        openDialog: false
+    }
 }
 export default function (state = _initialState, action) {
     switch (action.type) {
         case 'GET_ACCOUNTS':
             if (!action.error && action.payload) {
-                return { ...state, accounts: parseAccounts(action.payload.data.accounts) }
+                // return { ...state, accounts: parseAccounts(action.payload.data.accounts) }
+                return {...state, accountState: {...state.accountState, accounts: parseAccounts(action.payload.data.accounts)}};
+            } else {
+                return state;
+            }
+        case 'GET_DIALOG_HANDLER':
+            if (!action.error) {
+                return { ...state, accountState: {...state.accountState, openDialog: action.payload }}
             } else {
                 return state;
             }

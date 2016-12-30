@@ -40,4 +40,10 @@ export default class MyBankingClientApi {
         })
     }
 
+    static dialogHandler(openDialog) {
+        return new Promise(function (resolve, reject) {
+            localStorage.setItem('openDialog', JSON.stringify(openDialog));
+            resolve(JSON.parse(localStorage.getItem('openDialog')));
+        })
+    }
 }

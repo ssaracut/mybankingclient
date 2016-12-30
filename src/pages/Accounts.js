@@ -9,21 +9,17 @@ import { Button, Cell, Chip, ChipContact, Dialog, DialogTitle, DialogContent, Di
 import AccountsActions from '../core/redux/accounts/AccountsActions'
 
 class AccountsPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
+    componentWillMount() {
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
-    }
 
-    componentWillMount() {
-        if (this.props.accounts === null) {
+        if (this.props.accountState.accounts === null) {
             this.props.accountsActions.getAccounts();
         }
     }
 
     render() {
-        if (this.props.accounts === null) {
+        if (this.props.accountState.accounts === null) {
             return (
                 <Spinner style={{margin: 'auto'}}/>
             );
@@ -31,29 +27,25 @@ class AccountsPage extends React.Component {
         else {
             return (
                 <div style={{width: '90%', margin: 'auto'}}>
-                    {renderGrid(this.props.accounts, this.handleOpenDialog)}
-                    {renderDialog(this.state, this.handleCloseDialog)}
+                    {renderGrid(this.props.accountState.accounts, this.handleOpenDialog)}
+                    {renderDialog(this.props.accountState.openDialog, this.handleCloseDialog)}
                 </div>
             );
         }
     }
 
     handleOpenDialog() {
-        this.setState({
-            openDialog: true
-        });
+        this.props.accountsActions.getDialogHandler(true);
     }
 
     handleCloseDialog() {
-        this.setState({
-            openDialog: false
-        });
+        this.props.accountsActions.getDialogHandler(false);
     }
 }
 
-const renderDialog = function(state, handleCloseDialog){
+const renderDialog = function(openDialog, handleCloseDialog){
     return(
-        <Dialog open={state.openDialog} onCancel={handleCloseDialog}>
+        <Dialog open={openDialog} onCancel={handleCloseDialog}>
             <DialogTitle>Allow data collection?</DialogTitle>
             <DialogContent>
                 <p>Allowing us to collect data will let us get you the information you want faster.</p>
@@ -69,8 +61,10 @@ const renderDialog = function(state, handleCloseDialog){
 const renderGrid = function(accounts, handleOpenDialog) {
     var cells = [];
 
-    for (var i = 0; i < accounts.length; i++) {
-        cells.push(renderCell(accounts[i], handleOpenDialog))
+    if (accounts) {
+        for (var i = 0; i < accounts.length; i++) {
+            cells.push(renderCell(accounts[i], handleOpenDialog))
+        }
     }
 
     return (
@@ -97,10 +91,10 @@ const renderCell = function(account, handleOpenDialog) {
                 <CardActions border>
                     <div className="cardActionsDiv">
                         <div className="cardActionAlign"><IconButton name="list" /></div>
-                        <div className="cardActionAlign">Transactions</div>
+                        <div className="cardActionAlign">Trans.</div>
                     </div>
                     <div className="cardActionsDiv">
-                        <div className="cardActionAlign"><IconButton name="input" /></div>
+                        <div className="cardActionAlign"><IconButton name="photo_camera" /></div>
                         <div className="cardActionAlign">Deposit</div>
                     </div>
                     <div className="cardActionsDiv">
@@ -112,8 +106,8 @@ const renderCell = function(account, handleOpenDialog) {
                         <div className="cardActionAlign">Pay Bills</div>
                     </div>
                     <div className="cardActionsDiv">
-                        <div className="cardActionAlign"><IconButton name="email" /></div>
-                        <div className="cardActionAlign">EMT</div>
+                        <div className="cardActionAlign"><IconButton name="send" /></div>
+                        <div className="cardActionAlign">Send</div>
                     </div>
                 </CardActions>
                 <CardMenu className="cardMenuAccount">
@@ -130,7 +124,8 @@ const renderCell = function(account, handleOpenDialog) {
 }
 
 const mapStateToProps = function (state) {
-    return state.AccountsReducer;
+    return state.AccountsReducer
+
 };
 
 const mapDispatchToProps = function (dispatch) {
