@@ -1,6 +1,7 @@
 const _initialState = {
     accountState : {
         accounts: null,
+        accountDetail: null,
         openDialog: false
     }
 }
@@ -10,6 +11,12 @@ export default function (state = _initialState, action) {
             if (!action.error && action.payload) {
                 // return { ...state, accounts: parseAccounts(action.payload.data.accounts) }
                 return {...state, accountState: {...state.accountState, accounts: parseAccounts(action.payload.data.accounts)}};
+            } else {
+                return state;
+            }
+        case 'GET_ACCOUNT_DETAILS':
+            if (!action.error && action.payload) {
+                return { ...state, accountState: {...state.accountState, accountDetail: action.payload }}
             } else {
                 return state;
             }
@@ -37,7 +44,9 @@ function parseAccounts(accountsRaw) {
             name: a.description,
             number: a.number,
             classification: a.type,
-            balance: a.balance
+            balance: a.balance,
+            currency: a.currency,
+            detailLink: a.links.detail.href
         };
 
         accounts.push(account);

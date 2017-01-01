@@ -34,7 +34,8 @@ class AccountsPage extends React.Component {
         }
     }
 
-    handleOpenDialog() {
+    handleOpenDialog(detailLink) {
+        this.props.accountsActions.getAccountTransactions(detailLink);
         this.props.accountsActions.getDialogHandler(true);
     }
 
@@ -81,9 +82,9 @@ const renderCell = function(account, handleOpenDialog) {
                     <br />{account.number}
                     <br /><br />
                     <Tooltip label="Balance">
-                        <Chip onClick={handleOpenDialog}>
+                        <Chip onClick={() => handleOpenDialog(account.detailLink)}>
                             <ChipContact className="mdl-color--teal mdl-color-text--white"><i className="material-icons chipContact">account_balance</i></ChipContact>
-                            $ {account.balance}
+                            $ {account.balance} <b>{account.currency}</b>
                         </Chip>
                     </Tooltip>
                     <br /><br /><br />

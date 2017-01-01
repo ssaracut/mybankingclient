@@ -122,4 +122,40 @@ export default class BbvaApi {
         }.bind(this));
     }
 
+    static getAccountTransactions(detailLink) {
+        return new Promise(function (resolve, reject) {
+
+            const authorization = JSON.parse(localStorage.getItem('profile')).banks.bbva.access_token;
+            const refresh = JSON.parse(localStorage.getItem('profile')).banks.bbva.refresh_token;
+            const url = detailLink + '/transactions';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `jwt ${authorization}`
+                },
+                mode: 'cors'
+            }
+
+            fetch(url, options)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log('Account Transactions Request succeeded with JSON response', data);
+                    if (data.result.code === 200) {
+                        resolve(data);
+                    } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                        this.refreshAuthToken(refresh);
+                    } else {
+                        reject(data.result.info);
+                    }
+                }.bind(this))
+                .catch(function (error) {
+                    console.log('Accounts Request failed', error);
+                    reject(error);
+                });
+        }.bind(this));
+    }
+
 }
