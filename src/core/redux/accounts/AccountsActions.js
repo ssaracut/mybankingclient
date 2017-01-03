@@ -6,7 +6,7 @@ export default {
     getAccounts: createAction('GET_ACCOUNTS', () => {
         return BbvaApi.getAccounts()
     }),
-    getAccountTransactions: createAction('GET_ACCOUNT_DETAILS', (detailLink) => {
+    getAccountTransactions: createAction('GET_ACCOUNT_TRANSACTIONS', (detailLink) => {
         return BbvaApi.getAccountTransactions(detailLink)
     }),
     getDialogHandler: createAction('GET_DIALOG_HANDLER', (openDialog) => {

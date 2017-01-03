@@ -143,7 +143,7 @@ export default class BbvaApi {
                 })
                 .then(function (data) {
                     console.log('Account Transactions Request succeeded with JSON response', data);
-                    if (data.result.code === 200) {
+                    if (data.result.code === 200 || data.result.code === 206) {
                         resolve(data);
                     } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
                         this.refreshAuthToken(refresh);
@@ -157,5 +157,4 @@ export default class BbvaApi {
                 });
         }.bind(this));
     }
-
 }
