@@ -64,7 +64,7 @@ function parseAccountTransactions(accountTransactions) {
 
         let transaction = {
             id: a.id,
-            amount: a.amount,
+            amount: a.amount.toFixed(2),
             category: a.category,
             currency: a.currency,
             description: a.description,

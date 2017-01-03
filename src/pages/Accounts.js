@@ -97,13 +97,13 @@ const checkTransactionType = function(transaction) {
 
 const transactionTypeExpense = function(transaction) {
     return (
-        <div style={{color: '#ff0000'}}>{transaction.amount}</div>
+        <div style={{color: '#F22D2B'}}>{transaction.amount}</div>
     );
 }
 
 const transactionTypeIncome = function(transaction) {
     return (
-        <div style={{color: '#000000'}}>{transaction.amount}</div>
+        <div style={{color: '#0D8430'}}>{transaction.amount}</div>
     );
 }
 
