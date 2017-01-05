@@ -13,7 +13,6 @@ export default class BbvaApi {
 
     static getAuthToken(key) {
         return new Promise(function (resolve, reject) {
-            const profile = JSON.parse(localStorage.getItem('profile'));
             const authorization = btoa("app.bbva.mynewapp:gQZxI*hKVUF64ADt9BC34rmVT5Ztk0YtiQzBHv3LO2CtsIxS612q$xFBcawpJs4S");
             const url = `https://connect.bbva.com/token?grant_type=authorization_code&code=${key}&redirect_uri=https://localhost:3000/bbva`;
             const options = {
@@ -34,8 +33,6 @@ export default class BbvaApi {
                 .then(function (response) {
                     console.log('Token Request succeeded with JSON response', response);
                     if (response.status === 200) {
-                        profile.banks.bbva = { auth_data: response.data };
-                        localStorage.setItem('profile', JSON.stringify(profile));
                         resolve(response.data);
                     } else {
                         reject(response.data.result.info);
