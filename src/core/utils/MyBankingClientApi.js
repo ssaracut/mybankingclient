@@ -1,42 +1,78 @@
+import middleware from './middleware/MyBankingClientMiddleware'
+
 export default class MyBankingClientApi {
 
-    static getStoredAuth() {
+    static getStoredAuthData() {
         return new Promise(function (resolve, reject) {
             //grab auth-data from local store and return
-            resolve(JSON.parse(localStorage.getItem('auth-data')));
+            resolve(JSON.parse(localStorage.getItem('auth_data')));
+        })
+    }
+
+    static setStoredAuthData(data) {
+        return new Promise(function (resolve, reject) {
+            //store auth-data to local store and return
+            resolve(JSON.stringify(localStorage.setItem('auth_data', data)));
+        })
+    }
+
+    static getApiAuthToken(api, code) {
+        return new Promise(function (resolve, reject) {
+            middleware.getApiAuthToken(api,code)
+                .then(function (response) { resolve(response); })
+                .catch(function (error) { reject(error); });
         })
     }
 
     static getProfile() {
         return new Promise(function (resolve, reject) {
-            let profile = JSON.parse(localStorage.getItem('profile'));
-
-            if (!profile) {
-                //pretend we called an api for profile and are now storing it
-                profile = { banks: {} };
-                localStorage.setItem('profile', JSON.stringify(profile));
-            }
-            resolve(profile);
+            middleware.getProfile()
+                .then(function(response){ resolve(response); })
+                .catch(function(error){ reject(error); })
         })
     }
 
     static setProfile(profile) {
-        //fake a call to the api by storing in localstorage
-        localStorage.setItem('profile', JSON.stringify(profile));
+        return new Promise(function (resolve, reject) {
+            middleware.setProfile(profile)
+                .then(function(response){ resolve(response); })
+                .catch(function(error){ reject(error); })
+        })
     }
 
     static login() {
         return new Promise(function (resolve, reject) {
-            const auth_data = {};
-            localStorage.setItem('auth-data', JSON.stringify(auth_data));
-            resolve(auth_data);
+            middleware.login()
+                .then(function(response) {
+                    localStorage.setItem('auth_data', JSON.stringify(response));
+                    resolve(response);
+                })
         })
     }
 
     static logout() {
         return new Promise(function (resolve, reject) {
-            localStorage.clear();
-            resolve({});
+            middleware.logout()
+                .then(function(response) {
+                    localStorage.clear();
+                    resolve(response);
+                })
+        })
+    }
+
+    static getAccounts() {
+        return new Promise(function (resolve, reject) {
+            middleware.getAccounts()
+                .then(function(response){ resolve(response); })
+                .catch(function(error){ reject(error); })
+        })
+    }
+
+    static getAccountTransactions(detailLink) {
+        return new Promise(function (resolve, reject) {
+            middleware.getAccountTransactions(detailLink)
+                .then(function(response){ resolve(response); })
+                .catch(function(error){ reject(error); })
         })
     }
 

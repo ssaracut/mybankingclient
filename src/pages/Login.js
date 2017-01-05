@@ -9,6 +9,7 @@ import SessionActions from '../core/redux/session/SessionActions'
 
 class LoginPage extends React.Component {
     componentWillMount() {
+        //just faking a successful login at this point
         if (!this.props.session.loggedIn) {
             this.props.sessionActions.login()
                 .then(function () {

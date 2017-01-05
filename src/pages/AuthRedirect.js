@@ -1,21 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { browserHistory  } from 'react-router'
 
 import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 
-import BbvaApi from '../core/utils/BbvaApi'
+import SessionActions from '../core/redux/session/SessionActions'
 
 class AuthRedirect extends React.Component {
     componentWillMount() {
-        let currentLocation = this.props.router.getCurrentLocation();
-        let code = currentLocation.query.code;
-        if (currentLocation.pathname === '/bbva') {
-            BbvaApi.getAuthToken(code).then(function () {
+        const currentLocation = this.props.router.getCurrentLocation();
+        const api = currentLocation.pathname.substr(1, currentLocation.pathname.length);
+        const code = currentLocation.query.code;
+        this.props.sessionActions.getApiAuthToken(api, code)
+            .then(function () {
                 browserHistory.push('/profiles');
-            });
-        } else if (currentLocation.pathname === '/citi') {
-            //CitiApi.GetAuthToken(code);
-        }
+            })
     }
 
     render() {
@@ -30,4 +30,14 @@ class AuthRedirect extends React.Component {
     }
 }
 
-export default AuthRedirect;
+const mapStateToProps = function (state) {
+    return state.SessionReducer;
+};
+
+const mapDispatchToProps = function (dispatch) {
+    return {
+        sessionActions: bindActionCreators(SessionActions, dispatch)
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirect);

@@ -22,7 +22,13 @@ const logoutOption = { page: "logout", icon: "done", label: "Logout" };
 
 export default function (state = _initialState, action) {
     switch (action.type) {
-        case 'GET_STORED_AUTH':
+        case 'GET_API_AUTH_TOKEN':
+            if (action.payload) {
+                return {...state, session: {...state.session, auth_data: action.payload } };
+            } else {
+                return state;
+            }
+        case 'GET_STORED_AUTH_DATA':
             if (action.payload) {
                 return {...state, session: {...state.session, loggedIn: true, nav: loggedInNav, options: [logoutOption], auth_data: action.payload } };
             } else {

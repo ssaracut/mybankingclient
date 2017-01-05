@@ -8,12 +8,7 @@ import SessionActions from './core/redux/session/SessionActions'
 
 class App extends Component {
   componentWillMount() {
-    this.props.sessionActions.getStoredAuth()
-      .then(function (auth) {
-        if (auth && auth.payload) {
-          this.props.sessionActions.getProfile();
-        }
-      }.bind(this));
+    this.props.sessionActions.getStoredAuthData()
   }
   render() {
     return (
