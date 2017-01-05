@@ -24,22 +24,6 @@ class ProfilesPage extends React.Component {
             let location = encodeURI('https://localhost:3000/citi');
             window.location.href = `https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=a12b4efd-d529-416a-ab19-37585d54b0a3&scope=accounts_details_transactions&countryCode=AU&businessCode=GCB&locale=en_US&state=12345&redirect_uri=${location}`;
         }
-
-        let profiles = null;
-        if (this.props.session.profile) {
-            profiles = Object.entries(this.props.session.profile.banks).map(value => (
-                <Card key={value[0]} shadow={0} style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
-                    <CardTitle>{value[0]} Profile</CardTitle>
-                    <CardText style={{ height: '176px' }}>
-                        <p>Bank specific profile info.</p>
-                        <br />
-                        <p>firstname: {value[1].firstname}</p>
-                        <p>lastname: {value[1].lastname}</p>
-                    </CardText>
-                </Card>
-            ))
-        }
-
         return (
             <div>
                 <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
@@ -51,7 +35,19 @@ class ProfilesPage extends React.Component {
                         <Button raised colored onClick={LoginCiti}>Login Citi</Button>
                     </CardText>
                 </Card>
-                {profiles}
+                {
+                    this.props.session.profile &&
+                    Object.entries(this.props.session.profile.banks).map(value => (
+                        <Card key={value[0]} shadow={0} style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
+                            <CardTitle>{value[0]} Profile</CardTitle>
+                            <CardText style={{ height: '176px' }}>
+                                <p>Bank specific profile info.</p>
+                                <br />
+                                <p>firstname: {value[1].firstname}</p>
+                                <p>lastname: {value[1].lastname}</p>
+                            </CardText>
+                        </Card>))
+                }
             </div>
         );
     }
