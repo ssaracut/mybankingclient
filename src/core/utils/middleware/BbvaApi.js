@@ -177,16 +177,16 @@ export default class BbvaApi {
                 .then(function (response) {
                     return response.json();
                 })
-                .then(function (data) {
-                    console.log('BasicUserInfo Request succeeded with JSON response', data);
-                    if (data.result.code === 200) {
-                        resolve(data);
-                    } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                .then(function (response) {
+                    console.log('BasicUserInfo Request succeeded with JSON response', response);
+                    if (response.result.code === 200) {
+                        resolve(response.data);
+                    } else if (response.result.code === 401 && response.result.internal_code === "invalid_token") {
                         this.refreshAuthToken(refresh)
                             .then(function () { this.getBasicUserInfo() }.bind(this));
-                        reject(data.result.info);
+                        reject(response.result.info);
                     } else {
-                        reject(data.result.info);
+                        reject(response.result.info);
                     }
                 }.bind(this))
                 .catch(function (error) {

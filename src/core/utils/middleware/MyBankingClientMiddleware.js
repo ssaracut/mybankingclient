@@ -24,7 +24,6 @@ export default class MyBankingClientMiddleware {
 
     static getProfile() {
         return new Promise(function (resolve, reject) {
-
             //get profile from datastore
             let profile = JSON.parse(localStorage.getItem('profile'));
 
@@ -35,14 +34,23 @@ export default class MyBankingClientMiddleware {
             }
 
             //grab basic profile info from each registered bank
+            const apiCalls = [];
             for (let bank in profile.banks) {
-                ApiAdapters[bank].getBasicUserInfo()
-                    .then(function (data) { })
-                    .catch(function (error) { });
-
+                apiCalls.push(ApiAdapters[bank].getBasicUserInfo())
             }
 
-            resolve(profile);
+            Promise.all(apiCalls)
+                .then(function (values) {
+                    const banks = Object.keys(profile.banks);
+                    for (let bank = 0; bank < banks.length; bank++) {
+                        profile.banks[banks[bank]].firstname = values[bank].firstName;
+                        profile.banks[banks[bank]].lastname = values[bank].surname
+                    }
+                    resolve(profile);
+                })
+                .catch(function (error) {
+                    reject(error)
+                });
         })
     }
 

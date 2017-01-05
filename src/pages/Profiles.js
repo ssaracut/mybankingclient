@@ -28,12 +28,13 @@ class ProfilesPage extends React.Component {
         let profiles = null;
         if (this.props.session.profile) {
             profiles = Object.entries(this.props.session.profile.banks).map(value => (
-                <Card key={ value[0]} shadow={ 0 } style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
-                    <CardTitle>{ value[0]} Profile</CardTitle>
-                    <CardText  style={{ height: '176px' }}>
-                        Bank specific profile info.
-                        <br/>
-                        { JSON.stringify(value[1]) }
+                <Card key={value[0]} shadow={0} style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
+                    <CardTitle>{value[0]} Profile</CardTitle>
+                    <CardText style={{ height: '176px' }}>
+                        <p>Bank specific profile info.</p>
+                        <br />
+                        <p>firstname: {value[1].firstname}</p>
+                        <p>lastname: {value[1].lastname}</p>
                     </CardText>
                 </Card>
             ))
@@ -41,11 +42,11 @@ class ProfilesPage extends React.Component {
 
         return (
             <div>
-                <Card shadow={ 0 } style={{ width: '512px', margin: 'auto' }}>
+                <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
                     <CardTitle>My Banking Profile</CardTitle>
-                    <CardText  style={{ height: '176px' }}>
+                    <CardText style={{ height: '176px' }}>
                         This is where you can set profile information (show customer profile, and set which api's to enable, when an api is enabled show the countdown for the auth and refresh tokens)
-                        <br/><br/>
+                        <br /><br />
                         <Button raised colored onClick={LoginBBVA}>Login BBVA</Button>
                         <Button raised colored onClick={LoginCiti}>Login Citi</Button>
                     </CardText>
