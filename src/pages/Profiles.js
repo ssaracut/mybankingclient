@@ -32,20 +32,20 @@ class ProfilesPage extends React.Component {
                         This is where you can set profile information (show customer profile, and set which api's to enable, when an api is enabled show the countdown for the auth and refresh tokens)
                         <br /><br />
                         <Button raised colored onClick={LoginBBVA}>Login BBVA</Button>
-                        <br /><br/>
+                        <br /><br />
                         <Button raised colored onClick={LoginCiti}>Login Citi</Button>
                     </CardText>
                 </Card>
                 {
                     this.props.session.profile &&
-                    Object.entries(this.props.session.profile.banks).map(value => (
-                        <Card key={value[0]} shadow={0} style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
-                            <CardTitle>{value[0]} Profile</CardTitle>
+                    Object.keys(this.props.session.profile.banks).map(key => (
+                        <Card key={key} shadow={0} style={{ width: '512px', margin: 'auto', marginTop: '20px' }}>
+                            <CardTitle>{key} Profile</CardTitle>
                             <CardText style={{ height: '176px' }}>
                                 <p>Bank specific profile info.</p>
                                 <br />
-                                <p>firstname: {value[1].firstname}</p>
-                                <p>lastname: {value[1].lastname}</p>
+                                <p>firstname: {this.props.session.profile.banks[key].firstname}</p>
+                                <p>lastname: {this.props.session.profile.banks[key].lastname}</p>
                             </CardText>
                         </Card>))
                 }
