@@ -1,4 +1,5 @@
 import uuid from 'uuid'
+import { Profile } from './DataTypes'
 
 export default class CitiApi {
 
@@ -187,7 +188,10 @@ export default class CitiApi {
                 .then(function (response) {
                     console.log('BasicUserInfo Request succeeded with JSON response', response);
                     if (response.status === 200) {
-                        resolve(response.data);
+                        resolve(new Profile({
+                            firstName: response.data.customerName.firstName,
+                            lastName: response.data.customerName.lastName
+                        }));
                     } else if (response.status === 401) {
                         this.refreshAuthToken(refresh)
                             .then(function () { this.getBasicUserInfo() }.bind(this));

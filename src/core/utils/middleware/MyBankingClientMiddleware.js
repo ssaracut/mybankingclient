@@ -45,13 +45,8 @@ export default class MyBankingClientMiddleware {
                 .then(function (values) {
                     const banks = Object.keys(profile.banks);
                     for (let bank = 0; bank < banks.length; bank++) {
-                        if (banks[bank] === 'citi') {
-                            profile.banks[banks[bank]].firstname = values[bank].customerName.firstName;
-                            profile.banks[banks[bank]].lastname = values[bank].customerName.lastName;
-                        } else {
-                            profile.banks[banks[bank]].firstname = values[bank].firstName;
-                            profile.banks[banks[bank]].lastname = values[bank].surname
-                        }
+                        profile.banks[banks[bank]].firstname = values[bank].firstName;
+                        profile.banks[banks[bank]].lastname = values[bank].lastName;
                     }
                     resolve(profile);
                 })

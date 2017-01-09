@@ -1,3 +1,5 @@
+import { Profile } from './DataTypes'
+
 export default class BbvaApi {
 
     /*
@@ -180,7 +182,10 @@ export default class BbvaApi {
                 .then(function (response) {
                     console.log('BasicUserInfo Request succeeded with JSON response', response);
                     if (response.result.code === 200) {
-                        resolve(response.data);
+                        resolve(new Profile({
+                            firstName: response.data.firstName,
+                            lastName: response.data.surname
+                        }));
                     } else if (response.result.code === 401 && response.result.internal_code === "invalid_token") {
                         this.refreshAuthToken(refresh)
                             .then(function () { this.getBasicUserInfo() }.bind(this));
