@@ -22,7 +22,7 @@ class ProfilesPage extends React.Component {
 
         function LoginCiti() {
             let location = encodeURI('https://localhost:3000/citi');
-            window.location.href = `https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=a12b4efd-d529-416a-ab19-37585d54b0a3&scope=accounts_details_transactions&countryCode=AU&businessCode=GCB&locale=en_US&state=12345&redirect_uri=${location}`;
+            window.location.href = `https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=a12b4efd-d529-416a-ab19-37585d54b0a3&scope=accounts_details_transactions customers_profiles&countryCode=US&businessCode=GCB&locale=en_US&state=12345&redirect_uri=${location}`;
         }
         return (
             <div>
@@ -32,6 +32,7 @@ class ProfilesPage extends React.Component {
                         This is where you can set profile information (show customer profile, and set which api's to enable, when an api is enabled show the countdown for the auth and refresh tokens)
                         <br /><br />
                         <Button raised colored onClick={LoginBBVA}>Login BBVA</Button>
+                        <br /><br/>
                         <Button raised colored onClick={LoginCiti}>Login Citi</Button>
                     </CardText>
                 </Card>

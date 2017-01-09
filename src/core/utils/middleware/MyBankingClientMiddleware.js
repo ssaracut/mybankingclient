@@ -2,9 +2,11 @@
  This is just faking out a middleware that doesnt exist yet
 */
 import BbvaApi from './BbvaApi'
+import CitiApi from './CitiApi'
 
 const ApiAdapters = {
-    bbva: BbvaApi
+    bbva: BbvaApi,
+    citi: CitiApi
 }
 
 export default class MyBankingClientMiddleware {
@@ -43,8 +45,13 @@ export default class MyBankingClientMiddleware {
                 .then(function (values) {
                     const banks = Object.keys(profile.banks);
                     for (let bank = 0; bank < banks.length; bank++) {
-                        profile.banks[banks[bank]].firstname = values[bank].firstName;
-                        profile.banks[banks[bank]].lastname = values[bank].surname
+                        if (banks[bank] === 'citi') {
+                            profile.banks[banks[bank]].firstname = values[bank].customerName.firstName;
+                            profile.banks[banks[bank]].lastname = values[bank].customerName.lastName;
+                        } else {
+                            profile.banks[banks[bank]].firstname = values[bank].firstName;
+                            profile.banks[banks[bank]].lastname = values[bank].surname
+                        }
                     }
                     resolve(profile);
                 })
