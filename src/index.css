@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
 }
 
+/* Accounts Page */
 .cardAccount{
     margin: 0 auto 10px;
     width: 100% !important;
@@ -29,3 +30,41 @@ body {
 .chipContact{
     margin: 3px 0px 0px 1px;
 }
+/* Accounts Page */
+
+/* AccountTransactions */
+.accountTransactionsDialog {
+    width: 90%;
+}
+
+.accountTransactionsDialogContentDiv {
+    overflow-y: scroll;
+    height: 400px
+}
+
+.accountTransactionsListItemDiv {
+    backgroundColor: #ffffff;
+    width: 100%
+}
+
+.accountTransactionsListItemDescription {
+    backgroundColor: #ffffff;
+    width: 100%
+}
+
+.accountTransactionsListItemDate {
+    float: left
+}
+
+.accountTransactionsListItemOther {
+    float: right
+}
+
+.accountTransactionsExpense {
+    color: #F22D2B
+}
+
+.accountTransactionsIncome {
+    color: #0D8430
+}
+/* AccountTransactions */
