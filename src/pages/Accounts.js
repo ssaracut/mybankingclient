@@ -25,7 +25,7 @@ class AccountsPage extends React.Component {
         else {
             return (
                 <div style={{width: '90%', margin: 'auto'}}>
-                    {renderGrid(this.props.accountState.accounts, this.handleOpenDialog)}
+                    {this.renderGrid(this.props.accountState.accounts, this.handleOpenDialog)}
                     <AccountTransactions accountState={this.props.accountState} handleCloseDialog={this.handleCloseDialog} />
                 </div>
             );
@@ -40,14 +40,13 @@ class AccountsPage extends React.Component {
     handleCloseDialog() {
         this.props.accountsActions.getDialogHandler(false);
     }
-}
 
-const renderGrid = function(accounts, handleOpenDialog) {
+    renderGrid(accounts, handleOpenDialog) {
     var cells = [];
 
     if (accounts) {
         for (var i = 0; i < accounts.length; i++) {
-            cells.push(renderCell(accounts[i], handleOpenDialog))
+            cells.push(this.renderCell(accounts[i], handleOpenDialog))
         }
     }
 
@@ -56,7 +55,7 @@ const renderGrid = function(accounts, handleOpenDialog) {
     );
 }
 
-const renderCell = function(account, handleOpenDialog) {
+    renderCell(account, handleOpenDialog) {
     return (
         <Cell col={4} key={account.accountKey}>
             <Card shadow={0} className="cardAccount">
@@ -105,6 +104,7 @@ const renderCell = function(account, handleOpenDialog) {
             </Card>
         </Cell>
     );
+}
 }
 
 const mapStateToProps = function (state) {
