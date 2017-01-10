@@ -3,68 +3,68 @@ import { Button } from 'react-mdl/lib'
 import { Dialog, DialogContent, DialogActions, List, ListItem } from 'react-mdl/lib'
 
 class AccountTransactions extends React.Component {
-    render() {
-        return (
-            <Dialog open={this.props.accountState.openDialog} onCancel={this.props.handleCloseDialog} className="accountTransactionsDialog">
-                <DialogContent>
-                    <div className="accountTransactionsDialogContentDiv">{this.renderTransactionsList(this.props.accountState.accountTransactions)}</div>
-                </DialogContent>
-                <DialogActions>
-                    <Button type='button' onClick={this.props.handleCloseDialog}>Close</Button>
-                </DialogActions>
-            </Dialog>
-        );
-    }
+  render() {
+    return (
+      <Dialog open={this.props.accountState.openDialog} onCancel={this.props.handleCloseDialog} className="accountTransactionsDialog">
+        <DialogContent>
+          <div className="accountTransactionsDialogContentDiv">{this.renderTransactionsList(this.props.accountState.accountTransactions)}</div>
+        </DialogContent>
+        <DialogActions>
+          <Button type='button' onClick={this.props.handleCloseDialog}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
 
-    renderTransactionsList(accountTransactions) {
+  renderTransactionsList(accountTransactions) {
     var list = [];
 
     if (accountTransactions) {
-        accountTransactions.forEach(function (transaction) {
-            list.push(this.renderTransactionsListCell(transaction))
-        })
+      accountTransactions.forEach(function (transaction) {
+        list.push(this.renderTransactionsListCell(transaction))
+      })
     }
 
     return (
-        <List>{list}</List>
+      <List>{list}</List>
     );
-}
+  }
 
-    renderTransactionsListCell(transaction) {
+  renderTransactionsListCell(transaction) {
     return (
-        <ListItem key={transaction.id}>
-            <div className="accountTransactionsListItemDiv">
-                <div className="accountTransactionsListItemDescription"><b>{transaction.description}</b></div>
-                <div className="accountTransactionsListItemDate">{transaction.date}</div>
-                <div className="accountTransactionsListItemOther">{this.checkTransactionType(transaction)}</div>
-            </div>
-        </ListItem>
+      <ListItem key={transaction.id}>
+        <div className="accountTransactionsListItemDiv">
+          <div className="accountTransactionsListItemDescription"><b>{transaction.description}</b></div>
+          <div className="accountTransactionsListItemDate">{transaction.date}</div>
+          <div className="accountTransactionsListItemOther">{this.checkTransactionType(transaction)}</div>
+        </div>
+      </ListItem>
     );
-}
+  }
 
-    checkTransactionType(transaction) {
+  checkTransactionType(transaction) {
     if (transaction.expense === true) {
-        return (
-            <div>{this.transactionTypeExpense(transaction)}</div>
-        );
+      return (
+        <div>{this.transactionTypeExpense(transaction)}</div>
+      );
     } else {
-        return (
-            <div>{this.transactionTypeIncome(transaction)}</div>
-        );
+      return (
+        <div>{this.transactionTypeIncome(transaction)}</div>
+      );
     }
-}
+  }
 
-    transactionTypeExpense(transaction) {
+  transactionTypeExpense(transaction) {
     return (
-        <div className="accountTransactionsExpense">{transaction.amount}</div>
+      <div className="accountTransactionsExpense">{transaction.amount}</div>
     );
-}
+  }
 
-    transactionTypeIncome(transaction) {
+  transactionTypeIncome(transaction) {
     return (
-        <div className="accountTransactionsIncome">{transaction.amount}</div>
+      <div className="accountTransactionsIncome">{transaction.amount}</div>
     );
-}
+  }
 }
 
 export default AccountTransactions;

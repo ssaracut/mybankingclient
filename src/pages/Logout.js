@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 
-import SessionActions from '../core/redux/session/SessionActions'
+import { SessionActions } from 'mybankingclientlib'
 
 class LogoutPage extends React.Component {
   componentWillMount() {
@@ -14,7 +14,7 @@ class LogoutPage extends React.Component {
     return (
       <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
         <CardTitle>Logging out of My Banking Client</CardTitle>
-        <CardText  style={{ height: '176px' }}>
+        <CardText style={{ height: '176px' }}>
           This will display logout information one day.
         </CardText>
       </Card>

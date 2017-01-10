@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl'
 
-import SessionActions from './core/redux/session/SessionActions'
+import { SessionActions } from 'mybankingclientlib'
 
 class App extends Component {
   componentWillMount() {
@@ -16,19 +16,19 @@ class App extends Component {
         <Header transparent title="My Banking Client" style={{ color: 'white' }}>
           <Navigation>
             {this.props.session.options.map(option => (
-              <Link key={ option.page } to={ option.page }>{ option.label }</Link>
-            )) }
+              <Link key={option.page} to={option.page}>{option.label}</Link>
+            ))}
           </Navigation>
         </Header>
         <Drawer title="My Banking Client">
           <Navigation>
             {this.props.session.nav.items.map(item => (
-              <Link key={ item.page } to={ item.page }>{ item.label }</Link>
-            )) }
+              <Link key={item.page} to={item.page}>{item.label}</Link>
+            ))}
           </Navigation>
         </Drawer>
         <Content>
-          { this.props.children }
+          {this.props.children}
         </Content>
       </Layout>);
   }
