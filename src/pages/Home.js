@@ -4,9 +4,9 @@ import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 class HomePage extends React.Component {
   render() {
     return (
-      <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
+      <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
         <CardTitle>Welcome To My Banking Client</CardTitle>
-        <CardText  style={{ height: '176px' }}>
+        <CardText style={{height: '176px'}}>
           This is an example Banking Client that aggregates banking APIs from multiple institutions.
           <br />
           <br />

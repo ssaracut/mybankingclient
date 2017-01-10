@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux';
-import AppStore from './core/redux/AppStore';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 
+import AppStore from './core/redux/AppStore'
+import App from './App'
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';
 import Profiles from './pages/Profiles';
@@ -12,10 +12,7 @@ import AuthRedirect from './pages/AuthRedirect';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-
 import './index.css';
-import 'react-mdl/extra/material.css';
-import 'react-mdl/extra/material.js';
 
 ReactDOM.render(
   (<Provider store={AppStore}>

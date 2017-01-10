@@ -10,11 +10,12 @@ class LogoutPage extends React.Component {
   componentWillMount() {
     this.props.sessionActions.logout();
   }
+
   render() {
     return (
-      <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
+      <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
         <CardTitle>Logging out of My Banking Client</CardTitle>
-        <CardText  style={{ height: '176px' }}>
+        <CardText style={{height: '176px'}}>
           This will display logout information one day.
         </CardText>
       </Card>

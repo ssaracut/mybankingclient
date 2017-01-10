@@ -1,0 +1,25 @@
+.accountCardAccount {
+    margin: 0 auto 10px;
+    width: 100% !important;
+}
+
+.accountCardMenu {
+    color: #000000
+}
+
+.accountCardActionsDiv {
+    float: left;
+    position: relative;
+    margin: 0 10px
+}
+
+.accountCardActionAlign {
+    font-size: 11px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center
+}
+
+.accountChipContact {
+    margin: 3px 0px 0px 1px;
+}
