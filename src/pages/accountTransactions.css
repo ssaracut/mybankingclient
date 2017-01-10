@@ -1,0 +1,34 @@
+.accountTransactionsDialog {
+    width: 90% !important;
+}
+
+.accountTransactionsDialogContentDiv {
+    overflow-y: scroll;
+    height: 400px
+}
+
+.accountTransactionsListItemDiv {
+    backgroundColor: #ffffff;
+    width: 100%
+}
+
+.accountTransactionsListItemDescription {
+    backgroundColor: #ffffff;
+    width: 100%
+}
+
+.accountTransactionsListItemDate {
+    float: left
+}
+
+.accountTransactionsListItemOther {
+    float: right
+}
+
+.accountTransactionsExpense {
+    color: #F22D2B
+}
+
+.accountTransactionsIncome {
+    color: #0D8430
+}
