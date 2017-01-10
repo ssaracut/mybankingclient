@@ -14,7 +14,7 @@ build
 .env
 npm-debug.log
 
-
+# InteliJ IDEA
 .idea/libraries/mybankingclient_node_modules.xml
 .idea/misc.xml
 .idea/modules.xml
