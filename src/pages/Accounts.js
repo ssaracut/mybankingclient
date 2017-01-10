@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { Card, CardActions, CardMenu, CardText } from 'react-mdl/lib/Card'
-import { Button, Cell, Chip, ChipContact, Dialog, DialogTitle, DialogContent, DialogActions, Grid, IconButton, List, ListItem, ListItemContent, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib';
-
+import { Cell, Chip, ChipContact, Grid, IconButton, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib'
 import AccountsActions from '../core/redux/accounts/AccountsActions'
+import AccountTransactions from './AccountTransactions'
 
 class AccountsPage extends React.Component {
     componentWillMount() {
@@ -27,7 +26,7 @@ class AccountsPage extends React.Component {
             return (
                 <div style={{width: '90%', margin: 'auto'}}>
                     {renderGrid(this.props.accountState.accounts, this.handleOpenDialog)}
-                    {renderDialog(this.props.accountState, this.handleCloseDialog)}
+                    <AccountTransactions accountState={this.props.accountState} handleCloseDialog={this.handleCloseDialog} />
                 </div>
             );
         }
@@ -41,69 +40,6 @@ class AccountsPage extends React.Component {
     handleCloseDialog() {
         this.props.accountsActions.getDialogHandler(false);
     }
-}
-
-const renderDialog = function(accountState, handleCloseDialog){
-    return(
-        <Dialog open={accountState.openDialog} onCancel={handleCloseDialog} style={{width: '90%'}}>
-            <DialogContent>
-                <div id="" style={{overflowY: 'scroll', height:'400px'}}>{renderTransactionsList(accountState.accountTransactions)}</div>
-            </DialogContent>
-            <DialogActions>
-                <Button type='button' onClick={handleCloseDialog}>Close</Button>
-            </DialogActions>
-        </Dialog>
-    )
-}
-
-const renderTransactionsList = function(accountTransactions) {
-    var list = [];
-
-    if (accountTransactions){
-        accountTransactions.forEach(function (transaction) {
-            list.push(renderTransactionsListCell(transaction))
-        })
-    }
-
-    return (
-        <List>{list}</List>
-    );
-}
-
-const renderTransactionsListCell = function(transaction) {
-    return(
-        <ListItem key={transaction.id}>
-            <div style={{backgroundColor: '#ffffff', width: '100%'}}>
-                <div style={{backgroundColor: '#ffffff', width: '100%'}}><b>{transaction.description}</b></div>
-                <div style={{float: 'left'}}>{transaction.date}</div>
-                <div style={{float: 'right'}}>{checkTransactionType(transaction)}</div>
-            </div>
-        </ListItem>
-    );
-}
-
-const checkTransactionType = function(transaction) {
-    if (transaction.expense === true) {
-        return (
-            <div>{transactionTypeExpense(transaction)}</div>
-        );
-    } else {
-        return (
-            <div>{transactionTypeIncome(transaction)}</div>
-        );
-    }
-}
-
-const transactionTypeExpense = function(transaction) {
-    return (
-        <div style={{color: '#F22D2B'}}>{transaction.amount}</div>
-    );
-}
-
-const transactionTypeIncome = function(transaction) {
-    return (
-        <div style={{color: '#0D8430'}}>{transaction.amount}</div>
-    );
 }
 
 const renderGrid = function(accounts, handleOpenDialog) {
