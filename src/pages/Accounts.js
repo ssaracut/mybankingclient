@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styles from './accounts.css';
 
 import { Card, CardActions, CardMenu, CardText } from 'react-mdl/lib/Card'
 import { Button, Cell, Chip, ChipContact, Dialog, DialogTitle, DialogContent, DialogActions, Grid, IconButton, List, ListItem, ListItemContent, Menu, MenuItem, Spinner, Tooltip } from 'react-mdl/lib';

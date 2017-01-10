@@ -75,6 +75,26 @@ export default class MyBankingClientMiddleware {
     }
 
     static getAccounts() {
+        // return new Promise(function (resolve, reject) {
+        //     //get profile from datastore
+        //     let profile = JSON.parse(localStorage.getItem('profile'));
+        //     let accounts = [];
+
+        //     //grab accounts info from each registered bank
+        //     const apiCalls = [];
+        //     for (let bank in profile.banks) {
+        //         apiCalls.push(ApiAdapters[bank].getAccounts())
+        //     }
+
+        //     Promise.all(apiCalls)
+        //         .then(function (values) {
+        //             resolve(accounts);
+        //         })
+        //         .catch(function (error) {
+        //             reject(error)
+        //         });
+        // })
+
         return BbvaApi.getAccounts();
     }
 

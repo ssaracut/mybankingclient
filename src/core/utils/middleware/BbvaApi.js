@@ -1,4 +1,4 @@
-import { Profile } from './DataTypes'
+import { Profile, Account } from './DataTypes'
 
 export default class BbvaApi {
 
@@ -107,16 +107,29 @@ export default class BbvaApi {
                 .then(function (response) {
                     return response.json();
                 })
-                .then(function (data) {
-                    console.log('Accounts Request succeeded with JSON response', data);
-                    if (data.result.code === 200) {
-                        resolve(data);
-                    } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
+                .then(function (response) {
+                    console.log('Accounts Request succeeded with JSON response', response);
+                    if (response.result.code === 200) {
+                        let accounts = [];
+                        response.data.accounts.forEach(account => {
+                            accounts.push(new Account({
+                                accountKey: account.id,
+                                description: account.description,
+                                name: account.description,
+                                number: account.number,
+                                classification: account.type,
+                                balance: account.balance,
+                                currency: account.currency,
+                                detailLink: account.links.detail.href
+                            }))
+                        })
+                        resolve(accounts);
+                    } else if (response.result.code === 401 && response.result.internal_code === "invalid_token") {
                         this.refreshAuthToken(refresh)
                             .then(function () { this.getAccounts() }.bind(this));
-                        reject(data.result.info);
+                        reject(response.result.info);
                     } else {
-                        reject(data.result.info);
+                        reject(response.result.info);
                     }
                 }.bind(this))
                 .catch(function (error) {

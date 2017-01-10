@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { Profile } from './DataTypes'
+import { Profile, Account } from './DataTypes'
 
 export default class CitiApi {
 
@@ -93,32 +93,51 @@ export default class CitiApi {
 
     static getAccounts() {
         return new Promise(function (resolve, reject) {
-            const authorization = JSON.parse(localStorage.getItem('profile')).banks.bbva.auth_data.access_token;
-            const refresh = JSON.parse(localStorage.getItem('profile')).banks.bbva.auth_data.refresh_token;
-            const url = 'https://apis.bbva.com/accounts-sbx/v1/me/accounts';
+            const authorization = JSON.parse(localStorage.getItem('profile')).banks.citi.auth_data.access_token;
+            const refresh = JSON.parse(localStorage.getItem('profile')).banks.citi.auth_data.refresh_token;
+            const url = 'https://sandbox.apihub.citi.com/gcb/api/v1/accounts';
             const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `jwt ${authorization}`
+                    'Authorization': `Bearer ${authorization}`,
+                    'client_id': 'a12b4efd-d529-416a-ab19-37585d54b0a3',
+                    'uuid': uuid.v4()
                 },
                 mode: 'cors'
             }
 
             fetch(url, options)
+                .then(response =>
+                    response.json().then(json => ({
+                        status: response.status,
+                        data: json
+                    })))
                 .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log('Accounts Request succeeded with JSON response', data);
-                    if (data.result.code === 200) {
-                        resolve(data);
-                    } else if (data.result.code === 401 && data.result.internal_code === "invalid_token") {
-                        this.refreshAuthToken(refresh)
-                            .then(function () { this.getAccounts() }.bind(this));
-                        reject(data.result.info);
+                    console.log('Accounts Request succeeded with JSON response', response);
+                    if (response.status === 200) {
+                        let accounts = [];
+                        response.data.accountGroupSummary.forEach(accountGroup => {
+                            accountGroup.accounts.forEach(account => {
+                                accounts.push(new Account({
+                                    accountKey: account.id,
+                                    description: account.description,
+                                    name: account.description,
+                                    number: account.number,
+                                    classification: account.type,
+                                    balance: account.balance,
+                                    currency: account.currency,
+                                    detailLink: account.links.detail.href
+                                }))
+                            })
+                        })
+                        resolve(accounts);
+                        // } else if (response.status === 401 && data.result.internal_code === "invalid_token") {
+                        //     this.refreshAuthToken(refresh)
+                        //         .then(function () { this.getAccounts() }.bind(this));
+                        //     reject(response.result.info);
                     } else {
-                        reject(data.result.info);
+                        reject(response.result.info);
                     }
                 }.bind(this))
                 .catch(function (error) {
