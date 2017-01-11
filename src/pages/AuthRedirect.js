@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router'
 
+<<<<<<< HEAD
 import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
 
 import { SessionActions } from 'mybankingclientlib'
+=======
+import SessionActions from '../core/redux/session/SessionActions'
+>>>>>>> Refactor-Design
 
 class AuthRedirect extends React.Component {
   componentWillMount() {
@@ -20,12 +24,22 @@ class AuthRedirect extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <Card style={{ margin: "0 auto", marginTop: "30px", width: '80%' }}>
         <CardTitle>Returning...</CardTitle>
         <CardText>
           <div>Completing Authentication</div>
         </CardText>
       </Card>
+=======
+      <div></div>
+      // <Card style={{margin: "0 auto", marginTop: "30px", width: '80%'}}>
+      //   <CardTitle>Returning...</CardTitle>
+      //   <CardText>
+      //     <div>Completing Authentication</div>
+      //   </CardText>
+      // </Card>
+>>>>>>> Refactor-Design
     );
   }
 }
