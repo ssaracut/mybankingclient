@@ -1,6 +1,14 @@
+<<<<<<< HEAD
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { Provider } from 'react-redux';
+import { AppStore } from 'mybankingclientlib';
+=======
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+>>>>>>> Refactor-Design
 import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 
 import AppStore from './core/redux/AppStore'
@@ -19,13 +27,13 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
-        <Route path="accounts" component={Accounts}/>
-        <Route path="profiles" component={Profiles}/>
-        <Route path="bbva" component={AuthRedirect}/>
-        <Route path="citi" component={AuthRedirect}/>
-        <Route path="login" component={Login}/>
-        <Route path="logout" component={Logout}/>
-        <Route path="*" component={NoMatch}/>
+        <Route path="accounts" component={Accounts} />
+        <Route path="profiles" component={Profiles} />
+        <Route path="bbva" component={AuthRedirect} />
+        <Route path="citi" component={AuthRedirect} />
+        <Route path="login" component={Login} />
+        <Route path="logout" component={Logout} />
+        <Route path="*" component={NoMatch} />
       </Route>
     </Router>
   </Provider>),
