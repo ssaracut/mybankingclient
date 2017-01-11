@@ -1,29 +1,46 @@
-import React, { Component } from 'react';
-import { Icon, Menu } from 'semantic-ui-react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Link } from 'react-router'
+import { Icon, Menu } from 'semantic-ui-react'
 
+import SessionActions from '../core/redux/session/SessionActions'
 import './mainHeader.css';
 
 class MainHeader extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     this.state = {activeItem: 'home'};
+    this.props.sessionActions.getStoredAuthData()
   }
-
-  handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
   render() {
     const {activeItem} = this.state
 
     return (
       <Menu inverted className="mainHeaderMenu">
-        <Menu.Item name='home' active={activeItem === 'home'} onClick={this.props.toggleVisibility}>
-          <Icon name='bars' />
+        <Menu.Item name='home' className="mainHeaderMenuItem" onClick={this.props.toggleVisibility}>
+          <Icon name='bars'/>
         </Menu.Item>
-        <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>
-        <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>
+        <Menu.Menu position='right'>
+          {this.props.session.options.map(option => (
+            <Menu.Item key={option.page} name='Authentication' active={activeItem === 'authentication'} className="authentication">
+              <Link key={option.page} to={option.page}>{option.label}</Link>
+            </Menu.Item>
+          ))}
+        </Menu.Menu>
       </Menu>
     );
   }
 }
 
-export default MainHeader
+const mapStateToProps = function (state) {
+  return state.SessionReducer;
+};
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    sessionActions: bindActionCreators(SessionActions, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

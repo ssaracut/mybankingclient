@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Dimmer, Sidebar } from 'semantic-ui-react'
-import { Link } from 'react-router'
 
 import SessionActions from './core/redux/session/SessionActions'
 import MainHeader from './components/MainHeader'
@@ -22,9 +21,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="reactRoot">
+      <div className="appRoot">
         <MainHeader toggleVisibility={this.mainSidebarVisibility}/>
-        <Sidebar.Pushable as={Container}>
+        <Sidebar.Pushable as={Container}  className="appContainer">
           <MainNav sidebarVisible={this.state.sidebarVisible}/>
           <Sidebar.Pusher>
             <Dimmer.Dimmable dimmed={this.state.sidebarVisible} blurring>

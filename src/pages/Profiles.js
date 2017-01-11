@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Button } from 'react-mdl';
-import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Button, Header, Segment } from 'semantic-ui-react'
+
 
 import SessionActions from '../core/redux/session/SessionActions'
 
@@ -26,30 +26,28 @@ class ProfilesPage extends React.Component {
 
 		return (
 			<div>
-				<Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-					<CardTitle>My Banking Profile</CardTitle>
-					<CardText style={{height: '176px'}}>
-						This is where you can set profile information (show customer profile, and set which api's to
-						enable, when an api is enabled show the countdown for the auth and refresh tokens)
-						<br /><br />
-						<Button raised colored onClick={LoginBBVA}>Login BBVA</Button>
-						<br /><br />
-						<Button raised colored onClick={LoginCiti}>Login Citi</Button>
-					</CardText>
-				</Card>
-				{
-					this.props.session.profile &&
-					Object.keys(this.props.session.profile.banks).map(key => (
-						<Card key={key} shadow={0} style={{width: '512px', margin: 'auto', marginTop: '20px'}}>
-							<CardTitle>{key} Profile</CardTitle>
-							<CardText style={{height: '176px'}}>
-								<p>Bank specific profile info.</p>
-								<br />
-								<p>firstname: {this.props.session.profile.banks[key].firstname}</p>
-								<p>lastname: {this.props.session.profile.banks[key].lastname}</p>
-							</CardText>
-						</Card>))
-				}
+        <Segment compact id="Profile">
+          <Header as='h1'>Banking Profile</Header>
+          <p>This is where you can set profile information (show customer profile, and set which api's to enable, when an api is enabled show the countdown for the auth and refresh tokens)</p>
+          <p>Some of the links of the menu will require authentication, please visit the project README at 'Some Link Here' to view the table of users and their institutions.</p>
+          <Button.Group>
+            <Button onClick={LoginBBVA} negative>Login BBVA</Button>
+            <Button.Or />
+            <Button onClick={LoginCiti} positive>Login Citi</Button>
+          </Button.Group>
+        </Segment>
+        {
+          this.props.session.profile &&
+          Object.keys(this.props.session.profile.banks).map(key => (
+            <Segment key={key} compact id="Profile">
+              <Header as='h1'>{key} Profile</Header>
+              <p>Bank specific profile info.</p>
+              <br />
+              <p>firstname: {this.props.session.profile.banks[key].firstname}</p>
+              <p>lastname: {this.props.session.profile.banks[key].lastname}</p>
+            </Segment>
+          ))
+        }
 			</div>
 		);
 	}

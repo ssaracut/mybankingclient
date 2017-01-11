@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory  } from 'react-router'
 
-import { Card, CardTitle, CardText } from 'react-mdl/lib/Card'
-
 import SessionActions from '../core/redux/session/SessionActions'
 
 class AuthRedirect extends React.Component {
@@ -20,12 +18,13 @@ class AuthRedirect extends React.Component {
 
   render() {
     return (
-      <Card style={{margin: "0 auto", marginTop: "30px", width: '80%'}}>
-        <CardTitle>Returning...</CardTitle>
-        <CardText>
-          <div>Completing Authentication</div>
-        </CardText>
-      </Card>
+      <div></div>
+      // <Card style={{margin: "0 auto", marginTop: "30px", width: '80%'}}>
+      //   <CardTitle>Returning...</CardTitle>
+      //   <CardText>
+      //     <div>Completing Authentication</div>
+      //   </CardText>
+      // </Card>
     );
   }
 }

@@ -2,40 +2,16 @@
   height: 100% !important;
 }
 
-.reactRoot {
+.appRoot {
   height: 100% !important;
 }
 
-
-.ui.container {
+.appContainer {
   width: 100% !important;
-  height: calc(100% - 18px) !important;
-  min-height: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.ui.container.pushable {
-  width: 100% !important;
-  height: calc(100% - 18px) !important;
-  min-height: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.ui.container.pushable.pusher {
-  width: 100% !important;
-  height: calc(100% - 18px) !important;
-  min-height: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  height: calc(100% - 40px) !important;
 }
 
 .dimmable:not(.body) {
-  width: 100% !important;
-  height: calc(100% - 18px) !important;
-  min-height: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  padding-top: 40px !important;
   position: initial !important;
 }
