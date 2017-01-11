@@ -1,0 +1,11 @@
+.mainHeaderMenu {
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    z-index: 1000;
+}
+
+.mainHeaderMenuItem{
+    padding-left: 20px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
