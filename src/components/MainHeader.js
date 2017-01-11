@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import { Icon, Menu } from 'semantic-ui-react'
 
-import SessionActions from '../core/redux/session/SessionActions'
+import { SessionActions } from 'mybankingclientlib'
 import './mainHeader.css';
 
 class MainHeader extends Component {
@@ -23,7 +23,8 @@ class MainHeader extends Component {
         </Menu.Item>
         <Menu.Menu position='right'>
           {this.props.session.options.map(option => (
-            <Menu.Item key={option.page} name='Authentication' active={activeItem === 'authentication'} className="authentication">
+            <Menu.Item key={option.page} name='Authentication' active={activeItem === 'authentication'}
+                       className="authentication">
               <Link key={option.page} to={option.page}>{option.label}</Link>
             </Menu.Item>
           ))}
