@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { browserHistory } from 'react-router'
 
-
 import { SessionActions } from 'mybankingclientlib'
 
 class LoginPage extends React.Component {
@@ -21,14 +20,6 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <Card shadow={0} style={{ width: '512px', margin: 'auto' }}>
-        <CardTitle>Logining into My Banking Client</CardTitle>
-        <CardText style={{ height: '176px' }}>
-          This will be a login form one day.
-                </CardText>
-      </Card>
-=======
       <div></div>
       // <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
       //   <CardTitle>Logining into My Banking Client</CardTitle>
@@ -36,7 +27,6 @@ class LoginPage extends React.Component {
       //     This will be a login form one day.
       //   </CardText>
       // </Card>
->>>>>>> Refactor-Design
     );
   }
 }
@@ -48,7 +38,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     sessionActions: bindActionCreators(SessionActions, dispatch)
-  };
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

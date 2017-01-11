@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import { Menu, Sidebar } from 'semantic-ui-react'
 
-import SessionActions from '../core/redux/session/SessionActions'
+import { SessionActions } from 'mybankingclientlib'
 import './mainNav.css';
 
 class MainNav extends Component {
@@ -14,7 +14,8 @@ class MainNav extends Component {
 
   render() {
     return (
-      <Sidebar as={Menu} animation='overlay' width='thin' visible={this.props.sidebarVisible} icon='labeled' vertical inverted>
+      <Sidebar as={Menu} animation='overlay' width='thin' visible={this.props.sidebarVisible} icon='labeled' vertical
+               inverted>
         {this.props.session.nav.items.map(item => (
           <Menu.Item key={item.page} name='home'>
             <Link key={item.page} to={item.page}>{item.label}</Link>
