@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 5.7.0
+test:
+  override:
+    - npm run test -- --coverage
+  post:
+    - mv ./coverage $CIRCLE_TEST_REPORTS/
+    - cat $CIRCLE_TEST_REPORTS/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run build
