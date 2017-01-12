@@ -24,7 +24,7 @@ class App extends Component {
       <div className="appRoot">
         <MainHeader toggleVisibility={this.mainSidebarVisibility}/>
         <Sidebar.Pushable as={Container} className="appContainer">
-          <MainNav sidebarVisible={this.state.sidebarVisible}/>
+          <MainNav sidebarVisible={this.state.sidebarVisible} toggleVisibility={this.mainSidebarVisibility}/>
           <Sidebar.Pusher>
             <Dimmer.Dimmable dimmed={this.state.sidebarVisible} blurring>
               <Dimmer active={this.state.sidebarVisible} onClickOutside={this.mainSidebarVisibility}/>

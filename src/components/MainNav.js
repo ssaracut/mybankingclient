@@ -17,8 +17,8 @@ class MainNav extends Component {
       <Sidebar as={Menu} animation='overlay' width='thin' visible={this.props.sidebarVisible} icon='labeled' vertical
                inverted>
         {this.props.session.nav.items.map(item => (
-          <Menu.Item key={item.page} name='home'>
-            <Link key={item.page} to={item.page}>{item.label}</Link>
+          <Menu.Item key={item.page} as={Link} to={item.page} name='home' onClick={this.props.toggleVisibility}>
+            {item.label}
           </Menu.Item>
         ))}
       </Sidebar>
