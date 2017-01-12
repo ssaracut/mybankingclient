@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/ssaracut/mybankingclient.svg?style=svg)](https://circleci.com/gh/ssaracut/mybankingclient)
+[![Coverage Status](https://coveralls.io/repos/github/ssaracut/mybankingclient/badge.svg?branch=master)](https://coveralls.io/github/ssaracut/mybankingclient?branch=master)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
