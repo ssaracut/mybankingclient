@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Button, Modal } from 'semantic-ui-react'
 
 import './accountTransactions.css';
 
-class AccountTransactions extends React.Component {
+class AccountTransactions extends Component {
   render() {
     return (
-      <div></div>
+      <Modal size='large' open={this.props.accountState.openDialog} onClose={this.close} onClick={this.props.handleCloseDialog}>
+        <Modal.Header>
+          Transactions
+          <Button circular className="accountTransactionsButtonRemove" size="mini" onClick={this.props.handleCloseDialog} icon='remove' />
+        </Modal.Header>
+        <Modal.Content>
+          <p>Are you sure you want to delete your account</p>
+        </Modal.Content>
+        <Modal.Actions>
+
+
+        </Modal.Actions>
+      </Modal>
       // <Dialog open={this.props.accountState.openDialog} onCancel={this.props.handleCloseDialog}
       //         className="accountTransactionsDialog">
       //   <DialogContent>

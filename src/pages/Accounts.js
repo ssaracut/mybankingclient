@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Card, Dimmer, Grid, Loader } from 'semantic-ui-react'
+import { Button, Card, Dimmer, Grid, Icon, Label, Loader, Popup} from 'semantic-ui-react'
 
 import { AccountsActions } from 'mybankingclientlib'
 import AccountTransactions from '../components/AccountTransactions'
+import './accounts.css';
 
-class AccountsPage extends React.Component {
+class AccountsPage extends Component {
 	componentWillMount() {
 		this.handleOpenDialog = this.handleOpenDialog.bind(this);
 		this.handleCloseDialog = this.handleCloseDialog.bind(this);
@@ -28,8 +29,7 @@ class AccountsPage extends React.Component {
 			return (
 				<div className="account">
 					{this.renderGrid(this.props.accountState.accounts, this.handleOpenDialog)}
-					{/*<AccountTransactions accountState={this.props.accountState}*/}
-					{/*handleCloseDialog={this.handleCloseDialog}/>*/}
+					<AccountTransactions accountState={this.props.accountState} handleCloseDialog={this.handleCloseDialog}/>
 				</div>
 			);
 		}
@@ -63,39 +63,34 @@ class AccountsPage extends React.Component {
 	renderCell(account, handleOpenDialog) {
 		return (
 			<Grid.Column key={account.accountKey}>
-				<Card>
+				<Card color='blue'>
 					<Card.Content>
 						<Card.Header>{account.name}</Card.Header>
 						<Card.Meta>{account.number}</Card.Meta>
-						<Card.Description>extra</Card.Description>
+						<Card.Description className="accountCardDescription">
+              <Popup
+                trigger={
+                  <Button
+                    size="mini"
+                    floated='right'
+                    color='blue'
+                    content=''
+                    icon='dollar'
+                    label={{as: 'a', basic: true, color: 'blue', pointing: 'left', content: account.balance}}
+                    onClick={() => handleOpenDialog(account.detailLink)}
+                  />
+                }
+                positioning='bottom center'
+                content='Click to see transactions'
+                inverted
+              />
+						</Card.Description>
 					</Card.Content>
 					<Card.Content extra>
-						<div className='ui two buttons'>
-							<Button basic color='green'>Approve</Button>
-							<Button basic color='red'>Decline</Button>
-						</div>
+
 					</Card.Content>
 				</Card>
 			</Grid.Column>
-
-			// <Grid.Column key={account.accountKey}>
-			//   <Card>
-			//     <Card.Content>
-			//       <Image floated='right' size='mini' src='http://semantic-ui.com/images/avatar/large/steve.jpg' />
-			//       <Card.Header>{account.name}</Card.Header>
-			//       <Card.Meta>{account.number}</Card.Meta>
-			//       <Card.Description>
-			//         Steve wants to add you to the group <strong>best friends</strong>
-			//       </Card.Description>
-			//     </Card.Content>
-			//     <Card.Content extra>
-			//       <div className='ui two buttons'>
-			//         <Button basic color='green'>Approve</Button>
-			//         <Button basic color='red'>Decline</Button>
-			//       </div>
-			//     </Card.Content>
-			//   </Card>
-			// </Grid.Column>
 
 			// <Cell col={4} key={account.accountKey}>
 			// 	<Card shadow={0} className="accountCardAccount">
