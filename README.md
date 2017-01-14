@@ -1,3 +1,5 @@
+# mybankingclientlib
+
 [![CircleCI](https://circleci.com/gh/ssaracut/mybankingclient.svg?style=svg)](https://circleci.com/gh/ssaracut/mybankingclient)
 [![Coverage Status](https://coveralls.io/repos/github/ssaracut/mybankingclient/badge.svg?branch=master)](https://coveralls.io/github/ssaracut/mybankingclient?branch=master)
 
@@ -6,7 +8,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-##
+## Instructions for linking mybankingclientlib 
+You currently need to clone the mybankingclientlib project along with this one 
+and link the lib project to this one with the following instructions otherwise 
+the application will fail to start.
+
+Once the mybankingclientlib gets loaded into NPM it will get added as a 
+dependency and this instruction will only be required if you intend to
+test changes in the mybankingclientlib that aren't pushed to NPM yet.
+
+Sample workspace would be something like:
+
+{workspacedir}
+      |
+      |-/mybanking
+            |
+            |-/mybankingclient
+            |-/mybankingclientlib
+
+```
+$ git clone https://github.com/ssaracut/mybankingclientlib.git
+```
+
 ```
 $ cd mybankingclientlib
 $ npm install
