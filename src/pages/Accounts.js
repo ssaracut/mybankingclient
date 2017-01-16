@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Card, Dimmer, Grid, Icon, Label, Loader, Popup} from 'semantic-ui-react'
+import { Button, Card, Dimmer, Grid, Icon, Loader, Popup} from 'semantic-ui-react'
 
 import { AccountsActions } from 'mybankingclientlib'
 import AccountTransactions from '../components/AccountTransactions'
@@ -54,7 +54,7 @@ class AccountsPage extends Component {
 		}
 
 		return (
-			<Grid columns={3} divided>
+			<Grid stackable columns={3}>
 				<Grid.Row>{cells}</Grid.Row>
 			</Grid>
 		);
@@ -62,7 +62,7 @@ class AccountsPage extends Component {
 
 	renderCell(account, handleOpenDialog) {
 		return (
-			<Grid.Column key={account.accountKey}>
+			<Grid.Column key={account.accountKey} mobile={16} tablet={8} computer={4}>
 				<Card color='blue'>
 					<Card.Content>
 						<Card.Header>{account.name}</Card.Header>
@@ -87,48 +87,28 @@ class AccountsPage extends Component {
 						</Card.Description>
 					</Card.Content>
 					<Card.Content extra>
-
+						<div className="accountCardContent">
+							<Icon name="photo"/>
+							<div>Deposit</div>
+						</div>
+						<div className="accountCardContent">
+							<Icon name="exchange"/>
+							<div>Transfer</div>
+						</div>
+						<div className="accountCardContent">
+							<Icon name="list"/>
+							<div>Pay Bills</div>
+						</div>
+						<div className="accountCardContent">
+							<Icon name="send"/>
+							<div>Send</div>
+						</div>
 					</Card.Content>
 				</Card>
 			</Grid.Column>
 
 			// <Cell col={4} key={account.accountKey}>
 			// 	<Card shadow={0} className="accountCardAccount">
-			// 		<CardText>
-			// 			<b>{account.name}</b>
-			// 			<br />{account.number}
-			// 			<br /><br />
-			// 			<Tooltip label="Balance">
-			// 				<Chip onClick={() => handleOpenDialog(account.detailLink)}>
-			// 					<ChipContact className="mdl-color--teal mdl-color-text--white"><i
-			// 						className="material-icons accountChipContact">account_balance</i></ChipContact>
-			// 					$ {account.balance} <b>{account.currency}</b>
-			// 				</Chip>
-			// 			</Tooltip>
-			// 			<br /><br /><br />
-			// 		</CardText>
-			// 		<CardActions border>
-			// 			<div className="accountCardActionsDiv">
-			// 				<div className="accountCardActionAlign"><IconButton name="list"/></div>
-			// 				<div className="accountCardActionAlign">Trans.</div>
-			// 			</div>
-			// 			<div className="accountCardActionsDiv">
-			// 				<div className="accountCardActionAlign"><IconButton name="photo_camera"/></div>
-			// 				<div className="accountCardActionAlign">Deposit</div>
-			// 			</div>
-			// 			<div className="accountCardActionsDiv">
-			// 				<div className="accountCardActionAlign"><IconButton name="compare_arrows"/></div>
-			// 				<div className="accountCardActionAlign">Transfer</div>
-			// 			</div>
-			// 			<div className="accountCardActionsDiv">
-			// 				<div className="accountCardActionAlign"><IconButton name="attach_money"/></div>
-			// 				<div className="accountCardActionAlign">Pay Bills</div>
-			// 			</div>
-			// 			<div className="accountCardActionsDiv">
-			// 				<div className="accountCardActionAlign"><IconButton name="send"/></div>
-			// 				<div className="accountCardActionAlign">Send</div>
-			// 			</div>
-			// 		</CardActions>
 			// 		<CardMenu className="accountCardMenu">
 			// 			<IconButton name="more_vert" id={'account_' + account.accountKey}/>
 			// 			<Menu target={'account_' + account.accountKey} align="right">

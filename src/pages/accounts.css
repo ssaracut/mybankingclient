@@ -6,3 +6,10 @@
 .accountCardDescription {
     text-align: right;
 }
+
+.accountCardContent {
+    position: relative;
+    float: left;
+    text-align: center;
+    padding-right: 15px;
+}
