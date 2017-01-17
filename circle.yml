@@ -6,9 +6,9 @@ test:
     - npm run test -- --coverage
   post:
     - mv ./coverage $CIRCLE_TEST_REPORTS/
-    - cat $CIRCLE_TEST_REPORTS/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    - ./sendCoverage.sh
 deployment:
-  production:
-    branch: master
+  release:
+    tag: /v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?/
     commands:
       - npm run build
