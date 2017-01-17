@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Header, Segment } from 'semantic-ui-react'
 
 import './home.css';
 
-class HomePage extends React.Component {
+class HomePage extends Component {
   render() {
     return (
       <Segment compact id="home">

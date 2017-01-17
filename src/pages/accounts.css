@@ -1,4 +1,16 @@
 .account {
     width: 90%;
-    margin: auto
+    margin: auto;
+}
+
+.accountCardDescription {
+    text-align: right;
+}
+
+.accountCardContent {
+    position: relative;
+    float: left;
+    text-align: center;
+    padding-right: 10px;
+    font-size: 10px;
 }

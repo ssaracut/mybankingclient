@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Button, List, Modal } from 'semantic-ui-react'
 
 import './accountTransactions.css';
 
-class AccountTransactions extends React.Component {
+class AccountTransactions extends Component {
+  componentWillMount() {
+    this.renderTransactionsListCell = this.renderTransactionsListCell.bind(this);
+  }
+
   render() {
     return (
-      <div></div>
-      // <Dialog open={this.props.accountState.openDialog} onCancel={this.props.handleCloseDialog}
-      //         className="accountTransactionsDialog">
-      //   <DialogContent>
-      //     <div
-      //       className="accountTransactionsDialogContentDiv">{this.renderTransactionsList(this.props.accountState.accountTransactions)}</div>
-      //   </DialogContent>
-      //   <DialogActions>
-      //     <Button type='button' onClick={this.props.handleCloseDialog}>Close</Button>
-      //   </DialogActions>
-      // </Dialog>
+      <Modal size='large' open={this.props.accountState.openDialog} onClose={this.close}
+             onClick={this.props.handleCloseDialog}>
+        <Modal.Header>
+          Transactions
+          <Button circular className="accountTransactionsButtonRemove" size="mini"
+                  onClick={this.props.handleCloseDialog} icon='remove'/>
+        </Modal.Header>
+        <Modal.Content>
+          {this.renderTransactionsList(this.props.accountState.accountTransactions)}
+        </Modal.Content>
+        <Modal.Actions>
+
+        </Modal.Actions>
+      </Modal>
     );
   }
 
@@ -23,28 +31,28 @@ class AccountTransactions extends React.Component {
     var list = [];
 
     if (accountTransactions) {
-      accountTransactions.forEach(function (transaction) {
-        list.push(this.renderTransactionsListCell(transaction))
-      })
+      for (var i = 0; i < accountTransactions.length; i++) {
+        list.push(this.renderTransactionsListCell(accountTransactions[i]))
+      }
     }
 
     return (
-      <div></div>
-      // <List>{list}</List>
+      <List divided verticalAlign='middle'>{list}</List>
     );
   }
 
   renderTransactionsListCell(transaction) {
     return (
-      <div></div>
-      // <ListItem key={transaction.id}>
-      //   <div className="accountTransactionsListItemDiv">
-      //     <div className="accountTransactionsListItemDescription"><b>{transaction.description}</b></div>
-      //     <div className="accountTransactionsListItemDate">{transaction.date}</div>
-      //     <div className="accountTransactionsListItemOther">{this.checkTransactionType(transaction)}</div>
-      //   </div>
-      // </ListItem>
-    );
+      <List.Item key={transaction.id}>
+        <List.Content floated='right'>
+          <div>{this.checkTransactionType(transaction)}</div>
+        </List.Content>
+        <List.Content>
+          <div><b>{transaction.description}</b></div>
+          <div>{transaction.date}</div>
+        </List.Content>
+      </List.Item>
+    )
   }
 
   checkTransactionType(transaction) {
