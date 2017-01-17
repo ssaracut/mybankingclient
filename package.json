@@ -1,6 +1,6 @@
 {
-  "name": "bbva-citi-client2",
-  "version": "0.1.0",
+  "name": "mybankingclient",
+  "version": "1.0.0-alpha",
   "private": true,
   "devDependencies": {
     "coveralls": "^2.11.15",
