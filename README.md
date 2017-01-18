@@ -1,7 +1,9 @@
-# mybankingclientlib
+# mybankingclient
 
 [![CircleCI](https://circleci.com/gh/ssaracut/mybankingclient.svg?style=svg)](https://circleci.com/gh/ssaracut/mybankingclient)
 [![Coverage Status](https://coveralls.io/repos/github/ssaracut/mybankingclient/badge.svg?branch=master)](https://coveralls.io/github/ssaracut/mybankingclient?branch=master)
+
+Sample banking client side SPA application built on React-Redux.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -18,13 +20,14 @@ dependency and this instruction will only be required if you intend to
 test changes in the mybankingclientlib that aren't pushed to NPM yet.
 
 Sample workspace would be something like:
-
+```
 {workspacedir}
       |
       |-/mybanking
             |
             |-/mybankingclient
             |-/mybankingclientlib
+```
 
 ```
 $ git clone https://github.com/ssaracut/mybankingclientlib.git
