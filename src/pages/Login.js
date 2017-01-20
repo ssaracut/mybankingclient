@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router'
 
 import { SessionActions } from 'mybankingclientlib'
 
-class LoginPage extends React.Component {
+export class Login extends React.Component {
   componentWillMount() {
     //just faking a successful login at this point
     if (!this.props.session.loggedIn) {
@@ -41,4 +41,4 @@ const mapDispatchToProps = function (dispatch) {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

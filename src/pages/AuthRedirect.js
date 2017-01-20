@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router'
 
 import { SessionActions } from 'mybankingclientlib'
 
-class AuthRedirect extends React.Component {
+export class AuthRedirect extends React.Component {
   componentWillMount() {
     const currentLocation = this.props.router.getCurrentLocation();
     const api = currentLocation.pathname.substr(1, currentLocation.pathname.length);

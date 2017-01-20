@@ -7,7 +7,7 @@ import { AccountsActions } from 'mybankingclientlib'
 import AccountTransactions from '../components/AccountTransactions'
 import './accounts.css';
 
-class AccountsPage extends Component {
+export class Accounts extends Component {
   componentWillMount() {
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
@@ -129,4 +129,4 @@ const mapDispatchToProps = function (dispatch) {
 	}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Accounts);

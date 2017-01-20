@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { SessionActions } from 'mybankingclientlib'
 
-class LogoutPage extends React.Component {
+export class Logout extends React.Component {
   componentWillMount() {
     this.props.sessionActions.logout();
   }
@@ -32,4 +32,4 @@ const mapDispatchToProps = function (dispatch) {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);

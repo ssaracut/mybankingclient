@@ -8,33 +8,36 @@ import MainHeader from './components/MainHeader'
 import MainNav from './components/MainNav'
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   componentWillMount() {
-    this.state = {sidebarVisible: false}
+    this.state = { sidebarVisible: false }
     this.mainSidebarVisibility = this.mainSidebarVisibility.bind(this);
     this.props.sessionActions.getStoredAuthData()
   }
 
   mainSidebarVisibility() {
-    this.setState({sidebarVisible: !this.state.sidebarVisible})
+    this.setState({ sidebarVisible: !this.state.sidebarVisible })
   }
 
   render() {
     return (
       <div className="appRoot">
-        <MainHeader toggleVisibility={this.mainSidebarVisibility}/>
+        <MainHeader toggleVisibility={this.mainSidebarVisibility} />
         <Sidebar.Pushable as={Container} className="appContainer">
-          <MainNav sidebarVisible={this.state.sidebarVisible} toggleVisibility={this.mainSidebarVisibility}/>
+          <MainNav sidebarVisible={this.state.sidebarVisible} toggleVisibility={this.mainSidebarVisibility} />
           <Sidebar.Pusher>
             <Dimmer.Dimmable dimmed={this.state.sidebarVisible} blurring>
-              <Dimmer active={this.state.sidebarVisible} onClickOutside={this.mainSidebarVisibility}/>
+              <Dimmer active={this.state.sidebarVisible} onClickOutside={this.mainSidebarVisibility} />
               <Container>
-                { this.props.children }
+                {this.props.children}
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <small> You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+                </div>
               </Container>
             </Dimmer.Dimmable>
           </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
+        </Sidebar.Pushable >
+      </div >
     )
   }
 }

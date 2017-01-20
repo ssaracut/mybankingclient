@@ -5,7 +5,7 @@ import { Button, Header, Segment } from 'semantic-ui-react'
 
 import { SessionActions } from 'mybankingclientlib'
 
-class ProfilesPage extends React.Component {
+export class Profiles extends React.Component {
   componentWillMount() {
     if (!this.props.session.profile) {
       this.props.sessionActions.getProfile();
@@ -64,4 +64,4 @@ const mapDispatchToProps = function (dispatch) {
 	}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Profiles);
