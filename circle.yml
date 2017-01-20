@@ -5,7 +5,8 @@ machine:
     - docker
 dependencies:
   override:
-    - docker info        
+    - docker info
+    - npm install 
 test:
   override:
     - npm run test -- --coverage
