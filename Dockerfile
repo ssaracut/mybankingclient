@@ -1,11 +1,11 @@
 FROM nginx
 MAINTAINER ssaracut <ssaracut@gmail.com>
 
-ENV NGINX_PORT 80
+ENV NGINX_PORT 8080
 
 # Copy dist items into dir
 WORKDIR /usr/share/nginx/html
 COPY build/ /usr/share/nginx/html
 COPY .nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+EXPOSE 8080
