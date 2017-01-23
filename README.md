@@ -1,6 +1,6 @@
 # mybankingclient
-[![CircleCI](https://img.shields.io/circleci/project/github/ssaracut/mybankingclient.svg?style=flat-square)]()
-[![Coveralls](https://img.shields.io/coveralls/ssaracut/mybankingclient.svg?style=flat-square)]()
+[![CircleCI](https://img.shields.io/circleci/project/github/ssaracut/mybankingclient.svg?style=flat-square)](https://circleci.com/gh/ssaracut/mybankingclient)
+[![Coveralls](https://img.shields.io/coveralls/ssaracut/mybankingclient.svg?style=flat-square)](https://coveralls.io/github/ssaracut/mybankingclient)
 
 Sample banking client side SPA application built on React-Redux.
 
