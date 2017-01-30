@@ -32,6 +32,8 @@ export class App extends Component {
                 {this.props.children}
                 <div style={{ textAlign: 'center', width: '100%' }}>
                   <small> You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+                  <br />
+                  <small> You are running this application with the following public url: <b>{process.env.REACT_APP_PUBLIC_URL}</b></small>                  
                 </div>
               </Container>
             </Dimmer.Dimmable>

@@ -18,7 +18,7 @@ import './index.css'
 ReactDOM.render(
   (<Provider store={AppStore}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path={`${process.env.REACT_APP_PUBLIC_URL}`} component={App}>
         <IndexRoute component={Home} />
         <Route path="accounts" component={Accounts} />
         <Route path="profiles" component={Profiles} />
