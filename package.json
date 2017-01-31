@@ -1,6 +1,6 @@
 {
   "name": "mybankingclient",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.18",
   "private": true,
   "homepage":"https://ssaracut.com/mybankingclient",
   "devDependencies": {
@@ -20,8 +20,8 @@
     "semantic-ui-react": "^0.63.5"
   },
   "scripts": {
-    "start": "set HTTPS=true&&set REACT_APP_PUBLIC_URL=/&&react-scripts start",
-    "build": "set REACT_APP_PUBLIC_URL=mybankingclient&&react-scripts build",
+    "start": "set HTTPS=true&&set REACT_APP_PUBLIC_URL=mybankingclient&&react-scripts start",
+    "build": "REACT_APP_PUBLIC_URL=mybankingclient react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
