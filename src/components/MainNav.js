@@ -13,11 +13,13 @@ class MainNav extends Component {
   }
 
   render() {
+    const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
+
     return (
       <Sidebar as={Menu} animation='overlay' width='thin' visible={this.props.sidebarVisible} icon='labeled' vertical
-               inverted>
+        inverted>
         {this.props.session.nav.items.map(item => (
-          <Menu.Item key={item.page} as={Link} to={item.page} onClick={this.props.toggleVisibility}>
+          <Menu.Item key={item.page} as={Link} to={`${contextRoot}${item.page}`} onClick={this.props.toggleVisibility}>
             {item.label}
           </Menu.Item>
         ))}

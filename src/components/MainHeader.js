@@ -15,6 +15,7 @@ class MainHeader extends Component {
 
   render() {
     const {activeItem} = this.state
+    const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
 
     return (
       <Menu inverted className="mainHeaderMenu">
@@ -25,7 +26,7 @@ class MainHeader extends Component {
           {this.props.session.options.map(option => (
             <Menu.Item key={option.page} name='Authentication' active={activeItem === 'authentication'}
                        className="authentication">
-              <Link key={option.page} to={option.page}>{option.label}</Link>
+              <Link key={option.page} to={`${contextRoot}${option.page}`}>{option.label}</Link>
             </Menu.Item>
           ))}
         </Menu.Menu>

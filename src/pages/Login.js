@@ -12,7 +12,8 @@ export class Login extends React.Component {
       this.props.sessionActions.login()
         .then(function () {
           this.props.sessionActions.getProfile().then(function () {
-            browserHistory.push('');
+            const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
+            browserHistory.push(`${contextRoot}`);
           })
         }.bind(this));
     }
