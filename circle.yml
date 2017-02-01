@@ -3,10 +3,6 @@ machine:
     version: 5.7.0
   services:
     - docker
-dependencies:
-  override:
-    - docker info
-    - npm install 
 test:
   override:
     - npm run test -- --coverage
@@ -18,8 +14,7 @@ deployment:
     tag: /v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?/
     commands:
       - npm run build
-      - docker build -t $CIRCLE_PROJECT_REPONAME .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $REGISTRY_ENDPOINT
-      - tar -czvf $HOME/docker.tar.gz $HOME/.docker
-      - docker tag -f $CIRCLE_PROJECT_REPONAME $DOCKER_USER/$CIRCLE_PROJECT_REPONAME:$CIRCLE_TAG $DOCKER_USER/$CIRCLE_PROJECT_REPONAME:latest
+      - docker build -t $CIRCLE_PROJECT_REPONAME .
+      - docker tag $DOCKER_USER/$CIRCLE_PROJECT_REPONAME:$CIRCLE_TAG $DOCKER_USER/$CIRCLE_PROJECT_REPONAME:latest
       - docker push $DOCKER_USER/$CIRCLE_PROJECT_REPONAME
