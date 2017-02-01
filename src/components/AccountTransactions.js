@@ -11,14 +11,17 @@ class AccountTransactions extends Component {
   render() {
     return (
       <Modal size='large' open={this.props.accountState.openDialog} onClose={this.close}
-             onClick={this.props.handleCloseDialog}>
+        onClick={this.props.handleCloseDialog}>
         <Modal.Header>
           Transactions
           <Button circular className="accountTransactionsButtonRemove" size="mini"
-                  onClick={this.props.handleCloseDialog} icon='remove'/>
+            onClick={this.props.handleCloseDialog} icon='remove' />
         </Modal.Header>
         <Modal.Content>
           {this.renderTransactionsList(this.props.accountState.accountTransactions)}
+          {!this.props.accountState.accountTransactions &&            
+            <p>There is no transaction history available for this account.</p>
+          }
         </Modal.Content>
         <Modal.Actions>
 

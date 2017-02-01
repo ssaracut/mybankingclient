@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Header, Segment } from 'semantic-ui-react'
 
 import { SessionActions } from 'mybankingclientlib'
 
@@ -11,13 +12,12 @@ export class Logout extends React.Component {
 
   render() {
     return (
-      <div></div>
-      // <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-      //   <CardTitle>Logging out of My Banking Client</CardTitle>
-      //   <CardText style={{height: '176px'}}>
-      //     This will display logout information one day.
-      //   </CardText>
-      // </Card>
+      <div>
+        <Segment id="Logout">
+          <Header as='h1'>Logged out of My Banking Client</Header>
+          <p>This text may have something more relevant one day.</p>
+        </Segment>
+      </div>
     );
   }
 }

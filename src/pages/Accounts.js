@@ -101,6 +101,7 @@ export class Accounts extends Component {
             </div>
           </Card.Content>
         </Card>
+        <br />
       </Grid.Column>
 
       // <Cell col={4} key={account.accountKey}>

@@ -43,7 +43,7 @@ export class Profiles extends React.Component {
         {
           this.props.session.profile &&
           Object.keys(this.props.session.profile.banks).map(key => (
-            <Segment key={key} compact id="Profile">
+            <Segment key={key} id="Profile">
               <Header as='h1'>{key} Profile</Header>
               <p>Bank specific profile info.</p>
               <br />
