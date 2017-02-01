@@ -13,13 +13,16 @@ export class Profiles extends React.Component {
   }
 
   render() {
+    const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`;
+    const host = window.location.host;
+
     function LoginBBVA() {
-      let location = encodeURI('https://localhost:3000/bbva');
+      let location = encodeURI(`https://${host}${contextRoot}bbva`);
       window.location.href = `https://connect.bbva.com/token/authorize?client_id=app.bbva.mynewapp&response_type=code&redirect_uri=${location}`;
     }
 
     function LoginCiti() {
-      let location = encodeURI('https://localhost:3000/citi');
+      let location = encodeURI(`https://${host}${contextRoot}citi`);
       window.location.href = `https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=a12b4efd-d529-416a-ab19-37585d54b0a3&scope=accounts_details_transactions customers_profiles&countryCode=US&businessCode=GCB&locale=en_US&state=12345&redirect_uri=${location}`;
     }
 
@@ -55,13 +58,13 @@ export class Profiles extends React.Component {
 }
 
 const mapStateToProps = function (state) {
-	return state.SessionReducer;
+  return state.SessionReducer;
 };
 
 const mapDispatchToProps = function (dispatch) {
-	return {
-		sessionActions: bindActionCreators(SessionActions, dispatch)
-	}
+  return {
+    sessionActions: bindActionCreators(SessionActions, dispatch)
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profiles);

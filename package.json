@@ -1,6 +1,6 @@
 {
   "name": "mybankingclient",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.20",
   "private": true,
   "homepage":"https://ssaracut.com/mybankingclient",
   "devDependencies": {
@@ -10,7 +10,7 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
-    "mybankingclientlib": "^1.0.0-alpha.6",
+    "mybankingclientlib": "^1.0.0-alpha.7",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
