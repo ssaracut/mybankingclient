@@ -26,6 +26,16 @@ export class Profiles extends React.Component {
       window.location.href = `https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=a12b4efd-d529-416a-ab19-37585d54b0a3&scope=accounts_details_transactions customers_profiles&countryCode=US&businessCode=GCB&locale=en_US&state=12345&redirect_uri=${location}`;
     }
 
+    //check if the profile loaded and then grab each available bank profile
+    if (this.props.session.profile) {
+      const banks = this.props.session.profile.banks;
+      for (let bank in banks) {
+        if (!this.props.session.profile.banks[bank]) {
+          this.props.sessionActions.getBankProfile(bank);
+        }
+      }
+    }
+
     return (
       <div>
         <Segment compact id="Profile">
@@ -43,12 +53,21 @@ export class Profiles extends React.Component {
         {
           this.props.session.profile &&
           Object.keys(this.props.session.profile.banks).map(key => (
+            this.props.session.profile.banks[key] &&
             <Segment key={key} id="Profile">
               <Header as='h1'>{key} Profile</Header>
               <p>Bank specific profile info.</p>
               <br />
-              <p>firstname: {this.props.session.profile.banks[key].firstname}</p>
-              <p>lastname: {this.props.session.profile.banks[key].lastname}</p>
+              <p>firstname: {this.props.session.profile.banks[key].firstName}</p>
+              <p>lastname: {this.props.session.profile.banks[key].lastName}</p>
+            </Segment>
+            ||
+            !this.props.session.profile[key] &&
+            <Segment key={key} id="Profile">
+              <Header as='h1'>{key} Profile</Header>
+              <p>Bank specific profile info.</p>
+              <br />
+              <p>Throw a status message here.</p>
             </Segment>
           ))
         }

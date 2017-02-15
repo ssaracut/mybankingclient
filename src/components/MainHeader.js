@@ -10,7 +10,7 @@ import './mainHeader.css';
 class MainHeader extends Component {
   componentWillMount() {
     this.state = {activeItem: 'home'};
-    this.props.sessionActions.getStoredAuthData()
+//    this.props.sessionActions.getStoredAuthData()
   }
 
   render() {

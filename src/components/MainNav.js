@@ -9,7 +9,7 @@ import './mainNav.css';
 
 class MainNav extends Component {
   componentWillMount() {
-    this.props.sessionActions.getStoredAuthData()
+    //this.props.sessionActions.getStoredAuthData()
   }
 
   render() {

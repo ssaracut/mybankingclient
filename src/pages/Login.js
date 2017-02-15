@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { browserHistory } from 'react-router'
+import { Button, Segment, Header } from 'semantic-ui-react'
 
 import { SessionActions } from 'mybankingclientlib'
 
@@ -12,22 +12,31 @@ export class Login extends React.Component {
       this.props.sessionActions.login()
         .then(function () {
           this.props.sessionActions.getProfile().then(function () {
-            const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
-            browserHistory.push(`${contextRoot}`);
+            //const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
+            //browserHistory.push(`${contextRoot}`);
           })
         }.bind(this));
     }
   }
 
   render() {
+    const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`;
+    const host = window.location.host;
+
+    function LoginGoogle() {
+      let location = encodeURI(`https://${host}${contextRoot}api/login`);
+      //let location = encodeURI('http://localhost:8080/api/login')
+      window.location.href = `${location}`;
+    }
     return (
-      <div></div>
-      // <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-      //   <CardTitle>Logining into My Banking Client</CardTitle>
-      //   <CardText style={{height: '176px'}}>
-      //     This will be a login form one day.
-      //   </CardText>
-      // </Card>
+      <div>
+        <Segment id="Login">
+          <Header as='h1'>Login to MyBankingClient</Header>
+          <p>Enter username and password:</p>
+          <p>or login with one of the following:</p>
+          <Button onClick={LoginGoogle} negative>Login Google</Button>
+        </Segment>
+      </div >
     );
   }
 }

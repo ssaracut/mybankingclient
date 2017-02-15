@@ -12,7 +12,7 @@ export class App extends Component {
   componentWillMount() {
     this.state = { sidebarVisible: false }
     this.mainSidebarVisibility = this.mainSidebarVisibility.bind(this);
-    this.props.sessionActions.getStoredAuthData()
+    //this.props.sessionActions.getStoredAuthData()
   }
 
   mainSidebarVisibility() {
