@@ -9,13 +9,7 @@ export class Login extends React.Component {
   componentWillMount() {
     //just faking a successful login at this point
     if (!this.props.session.loggedIn) {
-      this.props.sessionActions.login()
-        .then(function () {
-          this.props.sessionActions.getProfile().then(function () {
-            //const contextRoot = process.env.REACT_APP_PUBLIC_URL === '/' ? '/' : `/${process.env.REACT_APP_PUBLIC_URL}/`
-            //browserHistory.push(`${contextRoot}`);
-          })
-        }.bind(this));
+      this.props.sessionActions.login();
     }
   }
 
@@ -24,7 +18,7 @@ export class Login extends React.Component {
     const host = window.location.host;
 
     function LoginGoogle() {
-      let location = encodeURI(`https://${host}${contextRoot}api/login`);
+      let location = encodeURI(`https://${host}${contextRoot}api/login/google`);
       //let location = encodeURI('http://localhost:8080/api/login')
       window.location.href = `${location}`;
     }
